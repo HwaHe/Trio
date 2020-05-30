@@ -14,6 +14,7 @@ namespace Trio
 {
     public partial class Main : Form
     {
+        public static Main main;
         private static readonly List<Button> subMenuButtonList = new List<Button>();
         private IconButton currentBtn;
         private Form activeForm = null;
@@ -32,6 +33,10 @@ namespace Trio
         public Main()
         {
             InitializeComponent();
+
+            main = this;
+            CheckForIllegalCrossThreadCalls = false;
+            //customize default design
             CustomizeDesign();
 
             // add all sidemenu buttons to the list
@@ -45,7 +50,7 @@ namespace Trio
 
             // customize left border shadow
             leftBorderBtn = new Panel();
-            leftBorderBtn.Size = new Size(7, 70);
+            leftBorderBtn.Size = new Size(7, btnNews.Size.Height);
             pnlSidemenu.Controls.Add(leftBorderBtn);
 
             //// remove title bar
@@ -74,7 +79,7 @@ namespace Trio
         private extern static void ReleaseCapture();
 
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
@@ -101,7 +106,7 @@ namespace Trio
         private void PnlTitle_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(Handle, 0x112, 0xf012, 0);
         }
         #endregion
 
@@ -228,6 +233,9 @@ namespace Trio
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorLibrarySeat);
+            Forms.Login login = new Forms.Login();
+            Forms.Login.main = main;
+            OpenChildForm(login);
             //TODO
             //Open child form
         }
@@ -264,7 +272,7 @@ namespace Trio
         /// 打开按钮对应form函数
         /// </summary>
         /// <param name="childForm"></param>
-        private void OpenChildForm(Form childForm)
+        public void OpenChildForm(Form childForm)
         {
             if (activeForm != null)
                 activeForm.Close();
@@ -342,8 +350,6 @@ namespace Trio
             leftBorderBtn.Visible = false;
             picItem.IconChar = IconChar.None;
             picItem.BackgroundImage = Image.FromFile(@"assets/logo/猫咪.png");
-
-
         }
     }
 }

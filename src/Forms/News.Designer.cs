@@ -40,7 +40,7 @@
             this.pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlOptions.Location = new System.Drawing.Point(0, 0);
             this.pnlOptions.Name = "pnlOptions";
-            this.pnlOptions.Size = new System.Drawing.Size(934, 120);
+            this.pnlOptions.Size = new System.Drawing.Size(934, 90);
             this.pnlOptions.TabIndex = 0;
             // 
             // picHome
@@ -50,7 +50,7 @@
             this.picHome.IconChar = FontAwesome.Sharp.IconChar.Home;
             this.picHome.IconColor = System.Drawing.SystemColors.ControlText;
             this.picHome.IconSize = 45;
-            this.picHome.Location = new System.Drawing.Point(36, 36);
+            this.picHome.Location = new System.Drawing.Point(28, 23);
             this.picHome.Name = "picHome";
             this.picHome.Size = new System.Drawing.Size(45, 45);
             this.picHome.TabIndex = 0;

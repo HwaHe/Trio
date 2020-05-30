@@ -190,6 +190,7 @@
             // 
             this.btnAbout.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAbout.FlatAppearance.BorderSize = 0;
+            this.btnAbout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnAbout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbout.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -215,6 +216,7 @@
             // 
             this.btnSettings.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -240,6 +242,7 @@
             // 
             this.btnSeat.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSeat.FlatAppearance.BorderSize = 0;
+            this.btnSeat.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSeat.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeat.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -332,6 +335,7 @@
             // 
             this.btnWallpaper.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnWallpaper.FlatAppearance.BorderSize = 0;
+            this.btnWallpaper.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnWallpaper.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnWallpaper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWallpaper.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -443,6 +447,7 @@
             // 
             this.btnNews.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnNews.FlatAppearance.BorderSize = 0;
+            this.btnNews.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnNews.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnNews.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNews.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -518,6 +523,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1184, 732);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

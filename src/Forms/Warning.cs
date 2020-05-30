@@ -16,5 +16,10 @@ namespace Trio.Forms
         {
             InitializeComponent();
         }
+
+        private void BtnOk_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
