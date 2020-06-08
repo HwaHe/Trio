@@ -16,6 +16,8 @@ namespace Trio
     {
         public static Main main;
         private static readonly List<Button> subMenuButtonList = new List<Button>();
+        public bool logged = false;
+        private Forms.Library lib;
         private IconButton currentBtn;
         private Form activeForm = null;
         private Panel leftBorderBtn;
@@ -83,7 +85,8 @@ namespace Trio
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+            Environment.Exit(0);
         }
 
         private void BtnMax_Click(object sender, EventArgs e)
@@ -230,14 +233,16 @@ namespace Trio
         /// <param name="e"></param>
         private void BtnSeat_Click(object sender, EventArgs e)
         {
+            if (activeForm!=null&&activeForm.GetType() == typeof(Trio.Forms.Library))
+                return;
+
+            //Open child form
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorLibrarySeat);
             Forms.Login login = new Forms.Login();
             Forms.Login.main = main;
             OpenChildForm(login);
-            //TODO
-            //Open child form
         }
 
         /// <summary>
@@ -274,8 +279,21 @@ namespace Trio
         /// <param name="childForm"></param>
         public void OpenChildForm(Form childForm)
         {
+            // 维持登录图书馆后不退出的状态
             if (activeForm != null)
-                activeForm.Close();
+                if (activeForm.GetType() == typeof(Trio.Forms.Library)&&logged)
+                {
+                    lib = activeForm as Forms.Library;
+                    lib.SendToBack();
+                }
+                else
+                    activeForm.Close();
+            // 如果已经登录过，直接打开登录后的界面
+            if (childForm.GetType() == typeof(Trio.Forms.Login)&&logged)
+            {
+                lib.BringToFront();
+                return;
+            }    
             activeForm = childForm;
             childForm.TopLevel = false;  // make it to behave like a control, not a form
             childForm.FormBorderStyle = FormBorderStyle.None;

@@ -89,6 +89,7 @@ namespace Trio.Forms
                 Library lib = new Library();
                 Library.main = main;
                 main.OpenChildForm(lib);
+                main.logged = true;
                 Close();
                 //FlushMemory();
             }

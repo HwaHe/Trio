@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
@@ -59,6 +60,7 @@
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.grpboxConfig.SuspendLayout();
@@ -67,6 +69,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.iconPictureBox3);
             this.panel1.Controls.Add(this.lblWelcome);
             this.panel1.Controls.Add(this.iconPictureBox2);
             this.panel1.Controls.Add(this.iconPictureBox1);
@@ -76,12 +79,26 @@
             this.panel1.Size = new System.Drawing.Size(934, 90);
             this.panel1.TabIndex = 0;
             // 
+            // iconPictureBox3
+            // 
+            this.iconPictureBox3.BackColor = System.Drawing.Color.White;
+            this.iconPictureBox3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.ArrowAltCircleLeft;
+            this.iconPictureBox3.IconColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBox3.IconSize = 45;
+            this.iconPictureBox3.Location = new System.Drawing.Point(89, 23);
+            this.iconPictureBox3.Name = "iconPictureBox3";
+            this.iconPictureBox3.Size = new System.Drawing.Size(45, 45);
+            this.iconPictureBox3.TabIndex = 4;
+            this.iconPictureBox3.TabStop = false;
+            this.iconPictureBox3.Click += new System.EventHandler(this.IconPictureBox3_Click);
+            // 
             // lblWelcome
             // 
             this.lblWelcome.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblWelcome.Location = new System.Drawing.Point(164, 38);
+            this.lblWelcome.Location = new System.Drawing.Point(227, 38);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(744, 30);
+            this.lblWelcome.Size = new System.Drawing.Size(681, 30);
             this.lblWelcome.TabIndex = 3;
             this.lblWelcome.Click += new System.EventHandler(this.LblWelcome_Click);
             // 
@@ -92,7 +109,7 @@
             this.iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.UserClock;
             this.iconPictureBox2.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox2.IconSize = 45;
-            this.iconPictureBox2.Location = new System.Drawing.Point(90, 23);
+            this.iconPictureBox2.Location = new System.Drawing.Point(150, 23);
             this.iconPictureBox2.Name = "iconPictureBox2";
             this.iconPictureBox2.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox2.TabIndex = 2;
@@ -390,6 +407,7 @@
             this.Text = "Library";
             this.Load += new System.EventHandler(this.Library_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.grpboxConfig.ResumeLayout(false);
@@ -432,5 +450,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker3;
         public System.ComponentModel.BackgroundWorker backgroundWorker4;
         public System.Windows.Forms.Label lblWelcome;
+        public FontAwesome.Sharp.IconPictureBox iconPictureBox3;
     }
 }

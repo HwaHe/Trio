@@ -448,5 +448,16 @@ namespace Trio.Forms
             txtLog.Text = "";
             KillSeat.Start(true);
         }
+
+        private void IconPictureBox3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+            // 退出登录，返回到登录界面
+            main.logged = false;
+            Forms.Login login = new Forms.Login();
+            Forms.Login.main = main;
+            main.OpenChildForm(login);
+        }
     }
 }
