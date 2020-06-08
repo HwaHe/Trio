@@ -163,6 +163,7 @@ namespace Trio
         {
             ResetButton(null);
             ShowSubMenu(pnlNews);
+            CloseActiveForm(true);
             ActivateButton(sender, RGBColors.colorNews);
         }
 
@@ -201,6 +202,7 @@ namespace Trio
         {
             ResetButton(null);
             ShowSubMenu(pnlWallpaper);
+            CloseActiveForm(true);
             ActivateButton(sender, RGBColors.colorWallpaper);
         }
 
@@ -233,13 +235,14 @@ namespace Trio
         /// <param name="e"></param>
         private void BtnSeat_Click(object sender, EventArgs e)
         {
-            if (activeForm!=null&&activeForm.GetType() == typeof(Trio.Forms.Library))
-                return;
+            //if (activeForm!=null&&activeForm.GetType() == typeof(Trio.Forms.Library))
+            //    return;
 
             //Open child form
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorLibrarySeat);
+            CloseActiveForm(true);
             Forms.Login login = new Forms.Login();
             Forms.Login.main = main;
             OpenChildForm(login);
@@ -255,6 +258,7 @@ namespace Trio
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorSettings);
+            CloseActiveForm(true);
             //TODO
             //Open child form
         }
@@ -269,8 +273,22 @@ namespace Trio
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorAbout);
+            CloseActiveForm(true);
             //TODO
             //Open child form
+        }
+
+        public void CloseActiveForm(bool keepAlive)
+        { 
+            if (activeForm != null)
+                if (activeForm.GetType() == typeof(Trio.Forms.Library) && logged&&keepAlive)  // 维持登录图书馆后不退出的状态
+                {
+                    lib = activeForm as Forms.Library;
+                    lib.SendToBack();
+                    lib.Visible = false;
+                }
+                else
+                    activeForm.Close();
         }
 
         /// <summary>
@@ -279,19 +297,11 @@ namespace Trio
         /// <param name="childForm"></param>
         public void OpenChildForm(Form childForm)
         {
-            // 维持登录图书馆后不退出的状态
-            if (activeForm != null)
-                if (activeForm.GetType() == typeof(Trio.Forms.Library)&&logged)
-                {
-                    lib = activeForm as Forms.Library;
-                    lib.SendToBack();
-                }
-                else
-                    activeForm.Close();
             // 如果已经登录过，直接打开登录后的界面
             if (childForm.GetType() == typeof(Trio.Forms.Login)&&logged)
             {
                 lib.BringToFront();
+                lib.Visible = true;
                 return;
             }    
             activeForm = childForm;
@@ -366,6 +376,7 @@ namespace Trio
         {
             DisableButton();
             leftBorderBtn.Visible = false;
+            CloseActiveForm(false);
             picItem.IconChar = IconChar.None;
             picItem.BackgroundImage = Image.FromFile(@"assets/logo/猫咪.png");
         }

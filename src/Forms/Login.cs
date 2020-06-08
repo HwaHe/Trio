@@ -84,13 +84,13 @@ namespace Trio.Forms
                     Pwd.SetValue(comboUsr.Text, txtPwd.Text);
                 }
 
-                Hide();
-                Book.CheckResInf(); 
+                //Hide();
+                Book.CheckResInf();
+                Close();
                 Library lib = new Library();
                 Library.main = main;
                 main.OpenChildForm(lib);
                 main.logged = true;
-                Close();
                 //FlushMemory();
             }
             else if(response=="System Maintenance")

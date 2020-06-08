@@ -63,7 +63,6 @@ namespace Trio.Forms
 
         private void IconPictureBox1_Click(object sender, EventArgs e)
         {
-
             this.Close();
         }
 
