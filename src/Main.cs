@@ -165,6 +165,9 @@ namespace Trio
             ShowSubMenu(pnlNews);
             CloseActiveForm(true);
             ActivateButton(sender, RGBColors.colorNews);
+
+
+
         }
 
         private void BtnWhu_Click(object sender, EventArgs e)
@@ -243,6 +246,7 @@ namespace Trio
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorLibrarySeat);
             CloseActiveForm(true);
+
             Forms.Login login = new Forms.Login();
             Forms.Login.main = main;
             OpenChildForm(login);
@@ -260,7 +264,7 @@ namespace Trio
             ActivateButton(sender, RGBColors.colorSettings);
             CloseActiveForm(true);
             //TODO
-            //Open child form
+            OpenChildForm(new Forms.Settings());
         }
 
         /// <summary>

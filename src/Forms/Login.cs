@@ -147,7 +147,7 @@ namespace Trio.Forms
             }
             else if (exitFlag)
             {
-                Environment.Exit(0);
+                this.Close();
             }
         }
 

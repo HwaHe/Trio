@@ -16,5 +16,12 @@ namespace Trio.Forms
         {
             InitializeComponent();
         }
+
+        //private void PnlTitle_Paint(object sender, PaintEventArgs e)
+        //{
+        //    Graphics pnlLine = pnlTitle.CreateGraphics();
+        //    Pen blackPen = new Pen(Color.FromArgb(220, 220, 220), 1.5f);
+        //    pnlLine.DrawLine(blackPen, 0, 119, 934, 119);
+        //}
     }
 }
