@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
 using MySql.Data.MySqlClient;
+using System.Data.SQLite;
+using System.IO;
 
 
 namespace Trio.Forms
@@ -87,21 +89,22 @@ namespace Trio.Forms
 
         private void buttonClick(string url)  //进入新闻页
         {
+            
             Forms.News news = new Forms.News(url);
             main.OpenChildForm(news);
         }
         private void WLButtonClick(string title, string url)  //加入待看列表
         {
-            string connstr = "data source=localhost; " +
+            /*string connstr = "data source=localhost; " +
                 "database=newsTB; user id=root;password=1011;" +
-                "pooling=false;charset=utf8";//pooling代表是否使用连接池
-
+                "pooling=false;charset=utf8";//pooling代表是否使用连接池*/
+            string connstr = "Data Source=newstb.sqlite;Version=3;";
             //插入到数据库
-            using (MySqlConnection connection = new MySqlConnection(connstr))
+            using (SQLiteConnection connection = new SQLiteConnection(connstr))
             {
                 string command = "INSERT INTO newstable (title,url)" +
                     "VALUES('" + title + "','" + url + "')";
-                MySqlCommand cmd = new MySqlCommand(command, connection);
+                SQLiteCommand cmd = new SQLiteCommand(command, connection);
                 try
                 {
                     connection.Open();
@@ -115,17 +118,14 @@ namespace Trio.Forms
         }
         private void DWLButtonClick(string title, string url)   //从待看列表中删除
         {
-            string connstr = "data source=localhost; " +
-                "database=newsTB; user id=root;password=1011;" +
-                "pooling=false;charset=utf8";//pooling代表是否使用连接池
-
+            string connstr = "Data Source=newstb.sqlite;Version=3;";
             //删除数据库记录
-            using (MySqlConnection connection = new MySqlConnection(connstr))
+            using (SQLiteConnection connection = new SQLiteConnection(connstr))
             {
                 string command = "DELETE " + 
                     "FROM newstable " +
                     "WHERE url='" + url + "'";
-                MySqlCommand cmd = new MySqlCommand(command, connection);
+                SQLiteCommand cmd = new SQLiteCommand(command, connection);
                 try
                 {
                     connection.Open();
@@ -139,22 +139,22 @@ namespace Trio.Forms
 
             List<string> titles = new List<string>();
             Dictionary<string, string> urls = new Dictionary<string, string>();
-            
 
-            //插入到数据库
-            using (MySqlConnection connection = new MySqlConnection(connstr))
+
+            //读数据库
+            using (SQLiteConnection connection = new SQLiteConnection(connstr))
             {
                 string command = "select * from newstable";
-                MySqlCommand cmd = new MySqlCommand(command, connection);
+                SQLiteCommand cmd = new SQLiteCommand(command, connection);
                 connection.Open();
-                MySqlDataReader mySqlDataReader = cmd.ExecuteReader();
+                SQLiteDataReader dataReader = cmd.ExecuteReader();
 
-                while (mySqlDataReader.Read())
+                while (dataReader.Read())
                 {
-                    titles.Add(mySqlDataReader["title"].ToString());
-                    urls.Add(mySqlDataReader["title"].ToString(), mySqlDataReader["url"].ToString());
+                    titles.Add(dataReader["title"].ToString());
+                    urls.Add(dataReader["title"].ToString(), dataReader["url"].ToString());
                 }
-                mySqlDataReader.Close();
+                dataReader.Close();
             }
             Forms.News news = new Forms.News(titles, urls, true);
             main.OpenChildForm(news);
@@ -176,8 +176,6 @@ namespace Trio.Forms
         {
 
         }
-
-        
 
         private void label2_Click(object sender, EventArgs e)
         {

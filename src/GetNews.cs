@@ -23,6 +23,9 @@ namespace Trio
         public GetNews()
         {
             client.Encoding = Encoding.UTF8;
+            getWhuTitle();
+            getBkTitle();
+            getCsTitle();
         }
         private HtmlDocument getHtml(string url)   //下载html
         {

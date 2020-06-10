@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
 using MySql.Data.MySqlClient;
+using System.Data.SQLite;
+using System.IO;
 
 namespace Trio
 {
@@ -29,6 +31,7 @@ namespace Trio
         private Dictionary<string, string> bkNewsUrl = new Dictionary<string, string>();
         private List<string> csNewsTitle = new List<string>();
         private Dictionary<string, string> csNewsUrl = new Dictionary<string, string>();
+        
 
 
         private struct RGBColors
@@ -71,6 +74,29 @@ namespace Trio
 
             //limit Maximized bounds to the working area
             MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;  //防止最大化覆盖任务栏
+
+            //先爬新闻标题
+            GetNews getNews = new GetNews();
+            whuNewsTitle = getNews.newsTitle;
+            whuNewsUrl = getNews.newsUrl;
+            bkNewsTitle = getNews.newsTitle;
+            bkNewsUrl = getNews.newsUrl;
+            csNewsTitle = getNews.newsTitle;
+            csNewsUrl = getNews.newsUrl;
+
+            //每次打开看一下数据库文件在不在
+            if (!File.Exists("MyDatabase.sqlite"))
+            {
+                SQLiteConnection.CreateFile("newstb.sqlite");
+                string connstr = "Data Source=newstb.sqlite;Version=3;";
+                using (SQLiteConnection connection = new SQLiteConnection(connstr))
+                {
+                    connection.Open();
+                    string command = "create table newstable(title varchar(500) NOT NULL,url varchar(1000) NOT NULL,primary key(url))";
+                    SQLiteCommand cmd = new SQLiteCommand(command, connection);
+                    cmd.ExecuteNonQuery();
+                }          
+            }
         }
 
         /// <summary>
@@ -180,10 +206,10 @@ namespace Trio
         {
             ResetButton(btnWhu);
             //TODO
-            GetNews getNews = new GetNews();
+            /*GetNews getNews = new GetNews();
             getNews.getWhuTitle();
             whuNewsTitle = getNews.newsTitle;
-            whuNewsUrl = getNews.newsUrl;
+            whuNewsUrl = getNews.newsUrl;*/
 
             Forms.News news = new Forms.News(whuNewsTitle, whuNewsUrl);
             Forms.News.main = main;
@@ -195,10 +221,10 @@ namespace Trio
         {
             ResetButton(btnBkjw);
             //TODO
-            GetNews getNews = new GetNews();
+            /*GetNews getNews = new GetNews();
             getNews.getBkTitle();
             bkNewsTitle = getNews.newsTitle;
-            bkNewsUrl = getNews.newsUrl;
+            bkNewsUrl = getNews.newsUrl;*/
 
             Forms.News news = new Forms.News(bkNewsTitle, bkNewsUrl);
             Forms.News.main = main;
@@ -211,10 +237,10 @@ namespace Trio
         {
             ResetButton(btnCs);
             //TODO
-            GetNews getNews = new GetNews();
+            /*GetNews getNews = new GetNews();
             getNews.getCsTitle();
             csNewsTitle = getNews.newsTitle;
-            csNewsUrl = getNews.newsUrl;
+            csNewsUrl = getNews.newsUrl;*/
 
             Forms.News news = new Forms.News(csNewsTitle, csNewsUrl);
             Forms.News.main = main;
@@ -229,24 +255,25 @@ namespace Trio
             //TODO
             List<string> titles = new List<string>();
             Dictionary<string, string> urls = new Dictionary<string, string>();
-            string connstr = "data source=localhost; " +
+            /*string connstr = "data source=localhost; " +
                 "database=newstb; user id=root;password=1011;" +
-                "pooling=false;charset=utf8";//pooling代表是否使用连接池
+                "pooling=false;charset=utf8";//pooling代表是否使用连接池*/
 
-            //插入到数据库
-            using (MySqlConnection connection = new MySqlConnection(connstr))
+            //读数据库
+            string connstr = "Data Source=newstb.sqlite;Version=3;";
+            using (SQLiteConnection connection = new SQLiteConnection(connstr))
             {
                 string command = "select * from newstable";
-                MySqlCommand cmd = new MySqlCommand(command, connection);
+                SQLiteCommand cmd = new SQLiteCommand(command, connection);
                 connection.Open();
-                MySqlDataReader mySqlDataReader = cmd.ExecuteReader();
+                SQLiteDataReader dataReader = cmd.ExecuteReader();
                 
-                while (mySqlDataReader.Read())
+                while (dataReader.Read())
                 {
-                    titles.Add(mySqlDataReader["title"].ToString());
-                    urls.Add(mySqlDataReader["title"].ToString(), mySqlDataReader["url"].ToString());
+                    titles.Add(dataReader["title"].ToString());
+                    urls.Add(dataReader["title"].ToString(), dataReader["url"].ToString());
                 }
-                mySqlDataReader.Close();
+                dataReader.Close();
             }
             Forms.News news = new Forms.News(titles, urls, true);
             Forms.News.main = main;
