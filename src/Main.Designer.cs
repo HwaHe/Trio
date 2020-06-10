@@ -41,8 +41,8 @@
             this.btnSettings = new FontAwesome.Sharp.IconButton();
             this.btnSeat = new FontAwesome.Sharp.IconButton();
             this.pnlWallpaper = new System.Windows.Forms.Panel();
-            this.btnWallpaperEngine = new System.Windows.Forms.Button();
-            this.btnAnime = new System.Windows.Forms.Button();
+            this.btnBA = new System.Windows.Forms.Button();
+            this.btnSW = new System.Windows.Forms.Button();
             this.btnBing = new System.Windows.Forms.Button();
             this.btnWallpaper = new FontAwesome.Sharp.IconButton();
             this.pnlNews = new System.Windows.Forms.Panel();
@@ -100,7 +100,7 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Font = new System.Drawing.Font("STXinwei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitle.Location = new System.Drawing.Point(50, 1);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(72, 36);
@@ -193,7 +193,7 @@
             this.btnAbout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbout.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnAbout.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAbout.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnAbout.IconChar = FontAwesome.Sharp.IconChar.Newspaper;
             this.btnAbout.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
@@ -218,7 +218,7 @@
             this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnSettings.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSettings.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnSettings.IconChar = FontAwesome.Sharp.IconChar.Tools;
             this.btnSettings.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
@@ -243,7 +243,7 @@
             this.btnSeat.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnSeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeat.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnSeat.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSeat.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSeat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnSeat.IconChar = FontAwesome.Sharp.IconChar.BookReader;
             this.btnSeat.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
@@ -264,8 +264,8 @@
             // pnlWallpaper
             // 
             this.pnlWallpaper.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.pnlWallpaper.Controls.Add(this.btnWallpaperEngine);
-            this.pnlWallpaper.Controls.Add(this.btnAnime);
+            this.pnlWallpaper.Controls.Add(this.btnBA);
+            this.pnlWallpaper.Controls.Add(this.btnSW);
             this.pnlWallpaper.Controls.Add(this.btnBing);
             this.pnlWallpaper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlWallpaper.Location = new System.Drawing.Point(0, 484);
@@ -273,41 +273,41 @@
             this.pnlWallpaper.Size = new System.Drawing.Size(229, 168);
             this.pnlWallpaper.TabIndex = 4;
             // 
-            // btnWallpaperEngine
+            // btnBA
             // 
-            this.btnWallpaperEngine.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnWallpaperEngine.FlatAppearance.BorderSize = 0;
-            this.btnWallpaperEngine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnWallpaperEngine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnWallpaperEngine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWallpaperEngine.ForeColor = System.Drawing.Color.Black;
-            this.btnWallpaperEngine.Location = new System.Drawing.Point(0, 112);
-            this.btnWallpaperEngine.Name = "btnWallpaperEngine";
-            this.btnWallpaperEngine.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
-            this.btnWallpaperEngine.Size = new System.Drawing.Size(229, 56);
-            this.btnWallpaperEngine.TabIndex = 2;
-            this.btnWallpaperEngine.Text = "Wallpaper Engine";
-            this.btnWallpaperEngine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnWallpaperEngine.UseVisualStyleBackColor = true;
-            this.btnWallpaperEngine.Click += new System.EventHandler(this.BtnWallpaperEngine_Click);
+            this.btnBA.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBA.FlatAppearance.BorderSize = 0;
+            this.btnBA.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnBA.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnBA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBA.ForeColor = System.Drawing.Color.Black;
+            this.btnBA.Location = new System.Drawing.Point(0, 112);
+            this.btnBA.Name = "btnBA";
+            this.btnBA.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnBA.Size = new System.Drawing.Size(229, 56);
+            this.btnBA.TabIndex = 2;
+            this.btnBA.Text = "彼岸图网";
+            this.btnBA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBA.UseVisualStyleBackColor = true;
+            this.btnBA.Click += new System.EventHandler(this.BtnBA_Click);
             // 
-            // btnAnime
+            // btnSW
             // 
-            this.btnAnime.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAnime.FlatAppearance.BorderSize = 0;
-            this.btnAnime.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnAnime.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnAnime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAnime.ForeColor = System.Drawing.Color.Black;
-            this.btnAnime.Location = new System.Drawing.Point(0, 56);
-            this.btnAnime.Name = "btnAnime";
-            this.btnAnime.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
-            this.btnAnime.Size = new System.Drawing.Size(229, 56);
-            this.btnAnime.TabIndex = 1;
-            this.btnAnime.Text = "Anime";
-            this.btnAnime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAnime.UseVisualStyleBackColor = true;
-            this.btnAnime.Click += new System.EventHandler(this.BtnAnime_Click);
+            this.btnSW.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSW.FlatAppearance.BorderSize = 0;
+            this.btnSW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnSW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSW.ForeColor = System.Drawing.Color.Black;
+            this.btnSW.Location = new System.Drawing.Point(0, 56);
+            this.btnSW.Name = "btnSW";
+            this.btnSW.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnSW.Size = new System.Drawing.Size(229, 56);
+            this.btnSW.TabIndex = 1;
+            this.btnSW.Text = "StreetWill";
+            this.btnSW.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSW.UseVisualStyleBackColor = true;
+            this.btnSW.Click += new System.EventHandler(this.BtnSW_Click);
             // 
             // btnBing
             // 
@@ -335,7 +335,7 @@
             this.btnWallpaper.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnWallpaper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWallpaper.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnWallpaper.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWallpaper.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnWallpaper.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnWallpaper.IconChar = FontAwesome.Sharp.IconChar.PhotoVideo;
             this.btnWallpaper.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
@@ -446,7 +446,7 @@
             this.btnNews.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnNews.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNews.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnNews.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNews.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNews.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnNews.IconChar = FontAwesome.Sharp.IconChar.Newspaper;
             this.btnNews.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
@@ -555,8 +555,8 @@
         private System.Windows.Forms.Button btnCs;
         private System.Windows.Forms.Button btnBkjw;
         private System.Windows.Forms.Panel pnlWallpaper;
-        private System.Windows.Forms.Button btnWallpaperEngine;
-        private System.Windows.Forms.Button btnAnime;
+        private System.Windows.Forms.Button btnBA;
+        private System.Windows.Forms.Button btnSW;
         private System.Windows.Forms.Button btnBing;
         private FontAwesome.Sharp.IconButton btnWallpaper;
         private FontAwesome.Sharp.IconButton btnAbout;
