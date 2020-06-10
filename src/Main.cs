@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
+using MySql.Data.MySqlClient;
 
 namespace Trio
 {
@@ -21,6 +22,14 @@ namespace Trio
         private IconButton currentBtn;
         private Form activeForm = null;
         private Panel leftBorderBtn;
+
+        private List<string> whuNewsTitle = new List<string>();
+        private Dictionary<string, string> whuNewsUrl = new Dictionary<string, string>();
+        private List<string> bkNewsTitle = new List<string>();
+        private Dictionary<string, string> bkNewsUrl = new Dictionary<string, string>();
+        private List<string> csNewsTitle = new List<string>();
+        private Dictionary<string, string> csNewsUrl = new Dictionary<string, string>();
+
 
         private struct RGBColors
         {
@@ -167,32 +176,82 @@ namespace Trio
             ActivateButton(sender, RGBColors.colorNews);
         }
 
-        private void BtnWhu_Click(object sender, EventArgs e)
+        private void BtnWhu_Click(object sender, EventArgs e)   //武大官网  1
         {
             ResetButton(btnWhu);
             //TODO
-            OpenChildForm(new Forms.News());
+            GetNews getNews = new GetNews();
+            getNews.getWhuTitle();
+            whuNewsTitle = getNews.newsTitle;
+            whuNewsUrl = getNews.newsUrl;
+
+            Forms.News news = new Forms.News(whuNewsTitle, whuNewsUrl);
+            Forms.News.main = main;
+            OpenChildForm(news);
             CustomizeButton(btnWhu);
         }
 
-        private void BtnBkjw_Click(object sender, EventArgs e)
+        private void BtnBkjw_Click(object sender, EventArgs e)   //本科生院官网  2
         {
             ResetButton(btnBkjw);
             //TODO
+            GetNews getNews = new GetNews();
+            getNews.getBkTitle();
+            bkNewsTitle = getNews.newsTitle;
+            bkNewsUrl = getNews.newsUrl;
+
+            Forms.News news = new Forms.News(bkNewsTitle, bkNewsUrl);
+            Forms.News.main = main;
+            OpenChildForm(news);
+
             CustomizeButton(btnBkjw);
         }
 
-        private void BtnCs_Click(object sender, EventArgs e)
+        private void BtnCs_Click(object sender, EventArgs e)   //计算机学院官网   3
         {
             ResetButton(btnCs);
             //TODO
+            GetNews getNews = new GetNews();
+            getNews.getCsTitle();
+            csNewsTitle = getNews.newsTitle;
+            csNewsUrl = getNews.newsUrl;
+
+            Forms.News news = new Forms.News(csNewsTitle, csNewsUrl);
+            Forms.News.main = main;
+            OpenChildForm(news);
+
             CustomizeButton(btnCs);
         }
 
-        private void BtnReadingList_Click(object sender, EventArgs e)
+        private void BtnReadingList_Click(object sender, EventArgs e)   //待读列表
         {
             ResetButton(btnReadingList);
             //TODO
+            List<string> titles = new List<string>();
+            Dictionary<string, string> urls = new Dictionary<string, string>();
+            string connstr = "data source=localhost; " +
+                "database=newstb; user id=root;password=1011;" +
+                "pooling=false;charset=utf8";//pooling代表是否使用连接池
+
+            //插入到数据库
+            using (MySqlConnection connection = new MySqlConnection(connstr))
+            {
+                string command = "select * from newstable";
+                MySqlCommand cmd = new MySqlCommand(command, connection);
+                connection.Open();
+                MySqlDataReader mySqlDataReader = cmd.ExecuteReader();
+                
+                while (mySqlDataReader.Read())
+                {
+                    titles.Add(mySqlDataReader["title"].ToString());
+                    urls.Add(mySqlDataReader["title"].ToString(), mySqlDataReader["url"].ToString());
+                }
+                mySqlDataReader.Close();
+            }
+            Forms.News news = new Forms.News(titles, urls, true);
+            Forms.News.main = main;
+            OpenChildForm(news);
+
             CustomizeButton(btnReadingList);
         }
         #endregion
