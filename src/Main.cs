@@ -77,15 +77,15 @@ namespace Trio
 
             //先爬新闻标题
             GetNews getNews = new GetNews();
-            whuNewsTitle = getNews.newsTitle;
-            whuNewsUrl = getNews.newsUrl;
-            bkNewsTitle = getNews.newsTitle;
-            bkNewsUrl = getNews.newsUrl;
-            csNewsTitle = getNews.newsTitle;
-            csNewsUrl = getNews.newsUrl;
+            whuNewsTitle = getNews.whuNewsTitle;
+            whuNewsUrl = getNews.whuNewsUrl;
+            bkNewsTitle = getNews.bkNewsTitle;
+            bkNewsUrl = getNews.bkNewsUrl;
+            csNewsTitle = getNews.csNewsTitle;
+            csNewsUrl = getNews.csNewsUrl;
 
             //每次打开看一下数据库文件在不在
-            if (!File.Exists("MyDatabase.sqlite"))
+            if (!File.Exists("newstb.sqlite"))
             {
                 SQLiteConnection.CreateFile("newstb.sqlite");
                 string connstr = "Data Source=newstb.sqlite;Version=3;";

@@ -17,8 +17,12 @@ namespace Trio
     class GetNews
     {
         private WebClient client = new WebClient();
-        public List<string> newsTitle = new List<string>();
-        public Dictionary<string, string> newsUrl = new Dictionary<string, string>();
+        public List<string> whuNewsTitle = new List<string>();
+        public Dictionary<string, string> whuNewsUrl = new Dictionary<string, string>();
+        public List<string> bkNewsTitle = new List<string>();
+        public Dictionary<string, string> bkNewsUrl = new Dictionary<string, string>();
+        public List<string> csNewsTitle = new List<string>();
+        public Dictionary<string, string> csNewsUrl = new Dictionary<string, string>();
 
         public GetNews()
         {
@@ -51,9 +55,9 @@ namespace Trio
             {
                 var node = nodes[i];
                 string title = node.InnerText;
-                newsTitle.Add(title);
+                whuNewsTitle.Add(title);
                 string href=node.GetAttributeValue("href", "");  //下一级的链接
-                newsUrl.Add(title, href);
+                whuNewsUrl.Add(title, href);
             }
         }
         public void getBkTitle()  //武汉大学本科生院官网
@@ -65,10 +69,10 @@ namespace Trio
             foreach (var node in nodes)
             {
                 string title = node.InnerText;
-                newsTitle.Add(title);
+                bkNewsTitle.Add(title);
                 string href = node.GetAttributeValue("href", "");  //下一级的链接
                 href = url + href;
-                newsUrl.Add(title, href);
+                bkNewsUrl.Add(title, href);
             }
         }
         public void getCsTitle()  //武汉大学计算机学院官网
@@ -81,10 +85,10 @@ namespace Trio
             {
 
                 string title = node.InnerText;
-                newsTitle.Add(title);
+                csNewsTitle.Add(title);
                 string href = node.GetAttributeValue("href", "");  //下一级的链接
                 href = url + href;
-                newsUrl.Add(title, href);
+                csNewsUrl.Add(title, href);
             }
         }
 
