@@ -1,29 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 using FontAwesome.Sharp;
 using MySql.Data.MySqlClient;
 using Trio.Forms;
+
+
 
 namespace Trio
 {
     public partial class Main : Form
     {
+        public static Main main;
         private static readonly List<Button> subMenuButtonList = new List<Button>();
+        public bool logged = false;
+        private Forms.Library lib;
         private IconButton currentBtn;
         private Form activeForm = null;
         private Panel leftBorderBtn;
+
+        private List<string> whuNewsTitle = new List<string>();
+        private Dictionary<string, string> whuNewsUrl = new Dictionary<string, string>();
+        private List<string> bkNewsTitle = new List<string>();
+        private Dictionary<string, string> bkNewsUrl = new Dictionary<string, string>();
+        private List<string> csNewsTitle = new List<string>();
+        private Dictionary<string, string> csNewsUrl = new Dictionary<string, string>();
+        
+
 
         private struct RGBColors
         {
@@ -38,6 +49,10 @@ namespace Trio
         public Main()
         {
             InitializeComponent();
+
+            main = this;
+            CheckForIllegalCrossThreadCalls = false;
+            //customize default design
             CustomizeDesign();
 
             // add all sidemenu buttons to the list
@@ -51,7 +66,7 @@ namespace Trio
 
             // customize left border shadow
             leftBorderBtn = new Panel();
-            leftBorderBtn.Size = new Size(7, 70);
+            leftBorderBtn.Size = new Size(7, btnNews.Size.Height);
             pnlSidemenu.Controls.Add(leftBorderBtn);
 
             //// remove title bar
@@ -61,6 +76,29 @@ namespace Trio
 
             //limit Maximized bounds to the working area
             MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;  //防止最大化覆盖任务栏
+
+            //先爬新闻标题
+            GetNews getNews = new GetNews();
+            whuNewsTitle = getNews.whuNewsTitle;
+            whuNewsUrl = getNews.whuNewsUrl;
+            bkNewsTitle = getNews.bkNewsTitle;
+            bkNewsUrl = getNews.bkNewsUrl;
+            csNewsTitle = getNews.csNewsTitle;
+            csNewsUrl = getNews.csNewsUrl;
+
+            //每次打开看一下数据库文件在不在
+            if (!File.Exists("newstb.sqlite"))
+            {
+                SQLiteConnection.CreateFile("newstb.sqlite");
+                string connstr = "Data Source=newstb.sqlite;Version=3;";
+                using (SQLiteConnection connection = new SQLiteConnection(connstr))
+                {
+                    connection.Open();
+                    string command = "create table newstable(title varchar(500) NOT NULL,url varchar(1000) NOT NULL,primary key(url))";
+                    SQLiteCommand cmd = new SQLiteCommand(command, connection);
+                    cmd.ExecuteNonQuery();
+                }          
+            }
         }
 
         /// <summary>
@@ -80,11 +118,12 @@ namespace Trio
         private extern static void ReleaseCapture();
 
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+            Environment.Exit(0);
         }
 
         private void BtnMax_Click(object sender, EventArgs e)
@@ -107,7 +146,7 @@ namespace Trio
         private void PnlTitle_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(Handle, 0x112, 0xf012, 0);
         }
         #endregion
 
@@ -161,35 +200,87 @@ namespace Trio
         {
             ResetButton(null);
             ShowSubMenu(pnlNews);
+            CloseActiveForm(true);
             ActivateButton(sender, RGBColors.colorNews);
         }
 
-        private void BtnWhu_Click(object sender, EventArgs e)
+        private void BtnWhu_Click(object sender, EventArgs e)   //武大官网  1
         {
             ResetButton(btnWhu);
             //TODO
-            OpenChildForm(new Forms.News());
+            /*GetNews getNews = new GetNews();
+            getNews.getWhuTitle();
+            whuNewsTitle = getNews.newsTitle;
+            whuNewsUrl = getNews.newsUrl;*/
+
+            Forms.News news = new Forms.News(whuNewsTitle, whuNewsUrl);
+            Forms.News.main = main;
+            OpenChildForm(news);
             CustomizeButton(btnWhu);
         }
 
-        private void BtnBkjw_Click(object sender, EventArgs e)
+        private void BtnBkjw_Click(object sender, EventArgs e)   //本科生院官网  2
         {
             ResetButton(btnBkjw);
             //TODO
+            /*GetNews getNews = new GetNews();
+            getNews.getBkTitle();
+            bkNewsTitle = getNews.newsTitle;
+            bkNewsUrl = getNews.newsUrl;*/
+
+            Forms.News news = new Forms.News(bkNewsTitle, bkNewsUrl);
+            Forms.News.main = main;
+            OpenChildForm(news);
+
             CustomizeButton(btnBkjw);
         }
 
-        private void BtnCs_Click(object sender, EventArgs e)
+        private void BtnCs_Click(object sender, EventArgs e)   //计算机学院官网   3
         {
             ResetButton(btnCs);
             //TODO
+            /*GetNews getNews = new GetNews();
+            getNews.getCsTitle();
+            csNewsTitle = getNews.newsTitle;
+            csNewsUrl = getNews.newsUrl;*/
+
+            Forms.News news = new Forms.News(csNewsTitle, csNewsUrl);
+            Forms.News.main = main;
+            OpenChildForm(news);
+
             CustomizeButton(btnCs);
         }
 
-        private void BtnReadingList_Click(object sender, EventArgs e)
+        private void BtnReadingList_Click(object sender, EventArgs e)   //待读列表
         {
             ResetButton(btnReadingList);
             //TODO
+            List<string> titles = new List<string>();
+            Dictionary<string, string> urls = new Dictionary<string, string>();
+            /*string connstr = "data source=localhost; " +
+                "database=newstb; user id=root;password=1011;" +
+                "pooling=false;charset=utf8";//pooling代表是否使用连接池*/
+
+            //读数据库
+            string connstr = "Data Source=newstb.sqlite;Version=3;";
+            using (SQLiteConnection connection = new SQLiteConnection(connstr))
+            {
+                string command = "select * from newstable";
+                SQLiteCommand cmd = new SQLiteCommand(command, connection);
+                connection.Open();
+                SQLiteDataReader dataReader = cmd.ExecuteReader();
+                
+                while (dataReader.Read())
+                {
+                    titles.Add(dataReader["title"].ToString());
+                    urls.Add(dataReader["title"].ToString(), dataReader["url"].ToString());
+                }
+                dataReader.Close();
+            }
+            Forms.News news = new Forms.News(titles, urls, true);
+            Forms.News.main = main;
+            OpenChildForm(news);
+
             CustomizeButton(btnReadingList);
         }
         #endregion
@@ -671,6 +762,7 @@ namespace Trio
         {
             ResetButton(null);
             ShowSubMenu(pnlWallpaper);
+            CloseActiveForm(true);
             ActivateButton(sender, RGBColors.colorWallpaper);
         }
 
@@ -847,11 +939,17 @@ namespace Trio
         /// <param name="e"></param>
         private void BtnSeat_Click(object sender, EventArgs e)
         {
+            //if (activeForm!=null&&activeForm.GetType() == typeof(Trio.Forms.Library))
+            //    return;
+
+            //Open child form
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorLibrarySeat);
-            //TODO
-            //Open child form
+            CloseActiveForm(true);
+            Forms.Login login = new Forms.Login();
+            Forms.Login.main = main;
+            OpenChildForm(login);
         }
 
         /// <summary>
@@ -864,6 +962,7 @@ namespace Trio
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorSettings);
+            CloseActiveForm(true);
             //TODO
             //Open child form
         }
@@ -878,18 +977,37 @@ namespace Trio
             ResetButton(null);
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorAbout);
+            CloseActiveForm(true);
             //TODO
             //Open child form
+        }
+
+        public void CloseActiveForm(bool keepAlive)
+        { 
+            if (activeForm != null)
+                if (activeForm.GetType() == typeof(Trio.Forms.Library) && logged&&keepAlive)  // 维持登录图书馆后不退出的状态
+                {
+                    lib = activeForm as Forms.Library;
+                    lib.SendToBack();
+                    lib.Visible = false;
+                }
+                else
+                    activeForm.Close();
         }
 
         /// <summary>
         /// 打开按钮对应form函数
         /// </summary>
         /// <param name="childForm"></param>
-        private void OpenChildForm(Form childForm)
+        public void OpenChildForm(Form childForm)
         {
-            if (activeForm != null)
-                activeForm.Close();
+            // 如果已经登录过，直接打开登录后的界面
+            if (childForm.GetType() == typeof(Trio.Forms.Login)&&logged)
+            {
+                lib.BringToFront();
+                lib.Visible = true;
+                return;
+            }    
             activeForm = childForm;
             childForm.TopLevel = false;  // make it to behave like a control, not a form
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -962,10 +1080,9 @@ namespace Trio
         {
             DisableButton();
             leftBorderBtn.Visible = false;
+            CloseActiveForm(false);
             picItem.IconChar = IconChar.None;
             picItem.BackgroundImage = Image.FromFile(@"assets/logo/猫咪.png");
-
-
         }
     }
 }
