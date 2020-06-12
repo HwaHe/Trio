@@ -329,44 +329,70 @@ namespace Trio
             byte[] bytes = null;
             bytes = File.ReadAllBytes(dirPath);
 
+            //如果数据库文件不存在则创建一个数据库文件
+            if (File.Exists(@"PicDB.sqlite"))
+            {
+                //do nothing
+            }
+            else
+            {
+                SQLiteConnection.CreateFile("PicDB.sqlite");
+            }
+
             //创建连接
-            string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            SQLiteConnection liteConnection;
+            liteConnection = new SQLiteConnection("Data Source=PicDB.sqlite;Version=3;");
+            //string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
+            //MySqlConnection mySqlConnection = new MySqlConnection(connString);
 
             //Command:尝试建表,判断唯一性,插入数据
             string createCommand = "create table if not exists myPicBing(imgId char(20) primary key, pic mediumblob not null);";
             string checkCommand = "select count(imgId) from myPicBing where imgId = @imgId;";
             string insertCommand = "insert into myPicBing(imgId, pic) values(@imgId, @pic);";
-            MySqlCommand mySqlCommandCreate = new MySqlCommand(createCommand, mySqlConnection);
-            MySqlCommand mySqlCommandCheck = new MySqlCommand(checkCommand, mySqlConnection);
-            MySqlCommand mySqlCommandInsert = new MySqlCommand(insertCommand, mySqlConnection);
-            mySqlCommandCheck.Parameters.AddWithValue("@imgId", imgId);
-            mySqlCommandInsert.Parameters.AddWithValue("@imgId", imgId);
-            mySqlCommandInsert.Parameters.AddWithValue("@pic", bytes);
+            SQLiteCommand commandCreate = new SQLiteCommand(createCommand, liteConnection);
+            SQLiteCommand commandCheck = new SQLiteCommand(checkCommand, liteConnection);
+            SQLiteCommand commandInsert = new SQLiteCommand(insertCommand, liteConnection);
+            //MySqlCommand mySqlCommandCreate = new MySqlCommand(createCommand, mySqlConnection);
+            //MySqlCommand mySqlCommandCheck = new MySqlCommand(checkCommand, mySqlConnection);
+            //MySqlCommand mySqlCommandInsert = new MySqlCommand(insertCommand, mySqlConnection);
+            commandCheck.Parameters.AddWithValue("@imgId", imgId);
+            commandInsert.Parameters.AddWithValue("@imgId", imgId);
+            commandInsert.Parameters.AddWithValue("@pic", bytes);
+            //mySqlCommandCheck.Parameters.AddWithValue("@imgId", imgId);
+            //mySqlCommandInsert.Parameters.AddWithValue("@imgId", imgId);
+            //mySqlCommandInsert.Parameters.AddWithValue("@pic", bytes);
 
             //打开连接
-            mySqlConnection.Open();
+            liteConnection.Open();
+            //mySqlConnection.Open();
 
             //执行create
-            mySqlCommandCreate.ExecuteNonQuery();
+            commandCreate.ExecuteNonQuery();
+            //mySqlCommandCreate.ExecuteNonQuery();
             //关闭create
-            mySqlCommandCreate.Dispose();
+            commandCreate.Dispose();
+            //mySqlCommandCreate.Dispose();
 
             //执行check
-            Object check = mySqlCommandCheck.ExecuteScalar();
+            Object check = commandCheck.ExecuteScalar();
+            //Object check = mySqlCommandCheck.ExecuteScalar();
             int checknum = Convert.ToInt32(check);
             if (checknum == 0)
             {
                 //执行insert
-                mySqlCommandInsert.ExecuteNonQuery();
+                commandInsert.ExecuteNonQuery();
+                //mySqlCommandInsert.ExecuteNonQuery();
                 //关闭insert
-                mySqlCommandInsert.Dispose();
+                commandInsert.Dispose();
+                //mySqlCommandInsert.Dispose();
             }
             //关闭check
-            mySqlCommandCheck.Dispose();
+            commandCheck.Dispose();
+            //mySqlCommandCheck.Dispose();
 
             //关闭连接
-            mySqlConnection.Close();
+            liteConnection.Close();
+            //mySqlConnection.Close();
         }
 
         //读出最新的九张图片，并显示在picturebox1-9中(Bing)
@@ -374,21 +400,28 @@ namespace Trio
         {
 
             //创建连接
-            string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            SQLiteConnection liteConnection;
+            liteConnection = new SQLiteConnection("Data Source=PicDB.sqlite;Version=3;");
+            //string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
+            //MySqlConnection mySqlConnection = new MySqlConnection(connString);
 
             //Command:读取图片
-            string readCommand = "select imgId, pic from myPicBing order by str_to_date(imgId, '%Y_%m_%d') desc limit 9;";
-            MySqlCommand mySqlCommandRead = new MySqlCommand(readCommand, mySqlConnection);
+            //string readCommand = "select imgId, pic from myPicBing order by strftime(imgId, '%Y_%m_%d') desc limit 9;";
+            string readCommand = "select imgId, pic from myPicBing order by imgId desc limit 9;";
+            SQLiteCommand commandRead = new SQLiteCommand(readCommand, liteConnection);
+            //MySqlCommand mySqlCommandRead = new MySqlCommand(readCommand, mySqlConnection);
 
             //打开连接
-            mySqlConnection.Open();
+            liteConnection.Open();
+            //mySqlConnection.Open();
 
             //执行read
-            MySqlDataReader mySqlDataReader = mySqlCommandRead.ExecuteReader();
+            SQLiteDataReader liteDataReader = commandRead.ExecuteReader();
+            //MySqlDataReader mySqlDataReader = mySqlCommandRead.ExecuteReader();
 
             //关闭read
-            mySqlCommandRead.Dispose();
+            commandRead.Dispose();
+            //mySqlCommandRead.Dispose();
 
             PictureBox[] pictureBoxes = new PictureBox[9];
             pictureBoxes[0] = wallpaper.pictureBox1;
@@ -412,20 +445,20 @@ namespace Trio
             textBoxes[7] = wallpaper.textBox8;
             textBoxes[8] = wallpaper.textBox9;
 
-            if (mySqlDataReader.HasRows)
+            if (liteDataReader.HasRows)
             {
                 int i = 0;
                 byte[] buffer = null;
-                while (mySqlDataReader.Read())
+                while (liteDataReader.Read()) 
                 {
-                    long len = mySqlDataReader.GetBytes(1, 0, null, 0, 0);
+                    long len = liteDataReader.GetBytes(1, 0, null, 0, 0);
                     buffer = new byte[len];
-                    len = mySqlDataReader.GetBytes(1, 0, buffer, 0, (int)len);
+                    len = liteDataReader.GetBytes(1, 0, buffer, 0, (int)len);
 
                     MemoryStream memoryStream = new MemoryStream(buffer);
                     Image image = Image.FromStream(memoryStream);
                     pictureBoxes[i].Image = image;
-                    textBoxes[i].Text = mySqlDataReader[0].ToString();
+                    textBoxes[i].Text = liteDataReader[0].ToString();
 
                     i++;
 
@@ -434,10 +467,12 @@ namespace Trio
             }
 
             //关闭reader
-            mySqlDataReader.Close();
+            liteDataReader.Close();
+            //mySqlDataReader.Close();
 
             //关闭连接
-            mySqlConnection.Close();
+            liteConnection.Close();
+            //mySqlConnection.Close();
 
         }
 
@@ -478,44 +513,71 @@ namespace Trio
             byte[] bytes = null;
             bytes = File.ReadAllBytes(dirPath);
 
+            //如果数据库文件不存在则创建一个数据库文件
+            if (File.Exists(@"PicDB.sqlite"))
+            {
+                //do nothing
+            }
+            else
+            {
+                SQLiteConnection.CreateFile("PicDB.sqlite");
+            }
+
             //创建连接
-            string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            SQLiteConnection liteConnection;
+            liteConnection = new SQLiteConnection("Data Source=PicDB.sqlite;Version=3;");
+            //string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
+            //MySqlConnection mySqlConnection = new MySqlConnection(connString);
 
             //Command:尝试建表,判断唯一性,插入数据
             string createCommand = "create table if not exists myPicSW(imgId char(20) primary key, pic mediumblob not null);";
             string checkCommand = "select count(imgId) from myPicSW where imgId = @imgId;";
             string insertCommand = "insert into myPicSW(imgId, pic) values(@imgId, @pic);";
-            MySqlCommand mySqlCommandCreate = new MySqlCommand(createCommand, mySqlConnection);
-            MySqlCommand mySqlCommandCheck = new MySqlCommand(checkCommand, mySqlConnection);
-            MySqlCommand mySqlCommandInsert = new MySqlCommand(insertCommand, mySqlConnection);
-            mySqlCommandCheck.Parameters.AddWithValue("@imgId", imgId);
-            mySqlCommandInsert.Parameters.AddWithValue("@imgId", imgId);
-            mySqlCommandInsert.Parameters.AddWithValue("@pic", bytes);
+            SQLiteCommand commandCreate = new SQLiteCommand(createCommand, liteConnection);
+            SQLiteCommand commandCheck = new SQLiteCommand(checkCommand, liteConnection);
+            SQLiteCommand commandInsert = new SQLiteCommand(insertCommand, liteConnection);
+            //MySqlCommand mySqlCommandCreate = new MySqlCommand(createCommand, mySqlConnection);
+            //MySqlCommand mySqlCommandCheck = new MySqlCommand(checkCommand, mySqlConnection);
+            //MySqlCommand mySqlCommandInsert = new MySqlCommand(insertCommand, mySqlConnection);
+            commandCheck.Parameters.AddWithValue("@imgId", imgId);
+            commandInsert.Parameters.AddWithValue("@imgId", imgId);
+            commandInsert.Parameters.AddWithValue("@pic", bytes);
+            //mySqlCommandCheck.Parameters.AddWithValue("@imgId", imgId);
+            //mySqlCommandInsert.Parameters.AddWithValue("@imgId", imgId);
+            //mySqlCommandInsert.Parameters.AddWithValue("@pic", bytes);
 
             //打开连接
-            mySqlConnection.Open();
+            liteConnection.Open();
+            //mySqlConnection.Open();
 
             //执行create
-            mySqlCommandCreate.ExecuteNonQuery();
+            commandCreate.ExecuteNonQuery();
+            //mySqlCommandCreate.ExecuteNonQuery();
+
             //关闭create
-            mySqlCommandCreate.Dispose();
+            commandCreate.Dispose();
+            //mySqlCommandCreate.Dispose();
 
             //执行check
-            Object check = mySqlCommandCheck.ExecuteScalar();
+            Object check = commandCheck.ExecuteScalar();
+            //Object check = mySqlCommandCheck.ExecuteScalar();
             int checknum = Convert.ToInt32(check);
             if (checknum == 0)
             {
                 //执行insert
-                mySqlCommandInsert.ExecuteNonQuery();
+                commandInsert.ExecuteNonQuery();
+                //mySqlCommandInsert.ExecuteNonQuery();
                 //关闭insert
-                mySqlCommandInsert.Dispose();
+                commandInsert.Dispose();
+                //mySqlCommandInsert.Dispose();
             }
             //关闭check
-            mySqlCommandCheck.Dispose();
+            commandCheck.Dispose();
+            //mySqlCommandCheck.Dispose();
 
             //关闭连接
-            mySqlConnection.Close();
+            liteConnection.Close();
+            //mySqlConnection.Close();
         }
 
         //读出最新的九张图片，并显示在picturebox1-9中(SW)
@@ -523,21 +585,28 @@ namespace Trio
         {
 
             //创建连接
-            string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            SQLiteConnection liteConnection;
+            liteConnection = new SQLiteConnection("Data Source=PicDB.sqlite;Version=3;");
+            //string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
+            //MySqlConnection mySqlConnection = new MySqlConnection(connString);
 
             //Command:读取图片
-            string readCommand = "select imgId, pic from myPicSW order by str_to_date(imgId, '%Y_%m_%d') desc limit 9;";
-            MySqlCommand mySqlCommandRead = new MySqlCommand(readCommand, mySqlConnection);
+            //string readCommand = "select imgId, pic from myPicSW order by strftime(imgId, '%Y_%m_%d') desc limit 9;";
+            string readCommand = "select imgId, pic from myPicSW order by imgId desc limit 9;";
+            SQLiteCommand commandRead = new SQLiteCommand(readCommand, liteConnection);
+            //MySqlCommand mySqlCommandRead = new MySqlCommand(readCommand, mySqlConnection);
 
             //打开连接
-            mySqlConnection.Open();
+            liteConnection.Open();
+            //mySqlConnection.Open();
 
             //执行read
-            MySqlDataReader mySqlDataReader = mySqlCommandRead.ExecuteReader();
+            SQLiteDataReader liteDataReader = commandRead.ExecuteReader();
+            //MySqlDataReader mySqlDataReader = mySqlCommandRead.ExecuteReader();
 
             //关闭read
-            mySqlCommandRead.Dispose();
+            commandRead.Dispose();
+            //mySqlCommandRead.Dispose();
 
             PictureBox[] pictureBoxes = new PictureBox[9];
             pictureBoxes[0] = wallpaper.pictureBox1;
@@ -561,20 +630,20 @@ namespace Trio
             textBoxes[7] = wallpaper.textBox8;
             textBoxes[8] = wallpaper.textBox9;
 
-            if (mySqlDataReader.HasRows)
+            if (liteDataReader.HasRows)
             {
                 int i = 0;
                 byte[] buffer = null;
-                while (mySqlDataReader.Read())
+                while (liteDataReader.Read())
                 {
-                    long len = mySqlDataReader.GetBytes(1, 0, null, 0, 0);
+                    long len = liteDataReader.GetBytes(1, 0, null, 0, 0);
                     buffer = new byte[len];
-                    len = mySqlDataReader.GetBytes(1, 0, buffer, 0, (int)len);
+                    len = liteDataReader.GetBytes(1, 0, buffer, 0, (int)len);
 
                     MemoryStream memoryStream = new MemoryStream(buffer);
                     Image image = Image.FromStream(memoryStream);
                     pictureBoxes[i].Image = image;
-                    textBoxes[i].Text = mySqlDataReader[0].ToString();
+                    textBoxes[i].Text = liteDataReader[0].ToString();
 
                     i++;
 
@@ -583,10 +652,12 @@ namespace Trio
             }
 
             //关闭reader
-            mySqlDataReader.Close();
+            liteDataReader.Close();
+            //mySqlDataReader.Close();
 
             //关闭连接
-            mySqlConnection.Close();
+            liteConnection.Close();
+            //mySqlConnection.Close();
 
         }
 
@@ -646,66 +717,100 @@ namespace Trio
             byte[] bytes = null;
             bytes = File.ReadAllBytes(dirPath);
 
+            //如果数据库文件不存在则创建一个数据库文件
+            if (File.Exists(@"PicDB.sqlite"))
+            {
+                //do nothing
+            }
+            else
+            {
+                SQLiteConnection.CreateFile("PicDB.sqlite");
+            }
+
             //创建连接
-            string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            SQLiteConnection liteConnection;
+            liteConnection = new SQLiteConnection("Data Source=PicDB.sqlite;Version=3;");
+            //string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
+            //MySqlConnection mySqlConnection = new MySqlConnection(connString);
 
             //Command:尝试建表,判断唯一性,插入数据
             string createCommand = "create table if not exists myPicBA(imgId char(20) primary key, pic mediumblob not null);";
             string checkCommand = "select count(imgId) from myPicBA where imgId = @imgId;";
             string insertCommand = "insert into myPicBA(imgId, pic) values(@imgId, @pic);";
-            MySqlCommand mySqlCommandCreate = new MySqlCommand(createCommand, mySqlConnection);
-            MySqlCommand mySqlCommandCheck = new MySqlCommand(checkCommand, mySqlConnection);
-            MySqlCommand mySqlCommandInsert = new MySqlCommand(insertCommand, mySqlConnection);
-            mySqlCommandCheck.Parameters.AddWithValue("@imgId", imgId);
-            mySqlCommandInsert.Parameters.AddWithValue("@imgId", imgId);
-            mySqlCommandInsert.Parameters.AddWithValue("@pic", bytes);
+            SQLiteCommand commandCreate = new SQLiteCommand(createCommand, liteConnection);
+            SQLiteCommand commandCheck = new SQLiteCommand(checkCommand, liteConnection);
+            SQLiteCommand commandInsert = new SQLiteCommand(insertCommand, liteConnection);
+            //MySqlCommand mySqlCommandCreate = new MySqlCommand(createCommand, mySqlConnection);
+            //MySqlCommand mySqlCommandCheck = new MySqlCommand(checkCommand, mySqlConnection);
+            //MySqlCommand mySqlCommandInsert = new MySqlCommand(insertCommand, mySqlConnection);
+            commandCheck.Parameters.AddWithValue("@imgId", imgId);
+            commandInsert.Parameters.AddWithValue("@imgId", imgId);
+            commandInsert.Parameters.AddWithValue("@pic", bytes);
+            //mySqlCommandCheck.Parameters.AddWithValue("@imgId", imgId);
+            //mySqlCommandInsert.Parameters.AddWithValue("@imgId", imgId);
+            //mySqlCommandInsert.Parameters.AddWithValue("@pic", bytes);
 
             //打开连接
-            mySqlConnection.Open();
+            liteConnection.Open();
+            //mySqlConnection.Open();
 
             //执行create
-            mySqlCommandCreate.ExecuteNonQuery();
+            commandCreate.ExecuteNonQuery();
+            //mySqlCommandCreate.ExecuteNonQuery();
             //关闭create
-            mySqlCommandCreate.Dispose();
+            commandCreate.Dispose();
+            //mySqlCommandCreate.Dispose();
 
             //执行check
-            Object check = mySqlCommandCheck.ExecuteScalar();
+            Object check = commandCheck.ExecuteScalar();
+            //Object check = mySqlCommandCheck.ExecuteScalar();
             int checknum = Convert.ToInt32(check);
             if (checknum == 0)
             {
                 //执行insert
-                mySqlCommandInsert.ExecuteNonQuery();
+                commandInsert.ExecuteNonQuery();
+                //mySqlCommandInsert.ExecuteNonQuery();
                 //关闭insert
-                mySqlCommandInsert.Dispose();
+                commandInsert.Dispose();
+                //mySqlCommandInsert.Dispose();
             }
             //关闭check
-            mySqlCommandCheck.Dispose();
+            commandCheck.Dispose();
+            //mySqlCommandCheck.Dispose();
 
             //关闭连接
-            mySqlConnection.Close();
+            liteConnection.Close();
+            //mySqlConnection.Close();
         }
 
         //读出最新的九张图片，并显示在picturebox1-9中(SW)
         static void ReadPicBA()
         {
 
+
             //创建连接
-            string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            SQLiteConnection liteConnection;
+            liteConnection = new SQLiteConnection("Data Source=PicDB.sqlite;Version=3;");
+            //string connString = "server=localhost;user id=root;pwd=200087;database=BlobPic;charset=utf8;Allow User Variables=True;";
+            //MySqlConnection mySqlConnection = new MySqlConnection(connString);
 
             //Command:读取图片
-            string readCommand = "select imgId, pic from myPicBA order by str_to_date(imgId, '%Y_%m_%d') desc limit 9;";
-            MySqlCommand mySqlCommandRead = new MySqlCommand(readCommand, mySqlConnection);
+            //string readCommand = "select imgId, pic from myPicBA order by strftime(imgId, '%Y_%m_%d') desc limit 9;";
+            string readCommand = "select imgId, pic from myPicBA order by imgId desc limit 9;";
+            SQLiteCommand commandRead = new SQLiteCommand(readCommand, liteConnection);
+            //MySqlCommand mySqlCommandRead = new MySqlCommand(readCommand, mySqlConnection);
 
             //打开连接
-            mySqlConnection.Open();
+            liteConnection.Open();
+            //mySqlConnection.Open();
 
             //执行read
-            MySqlDataReader mySqlDataReader = mySqlCommandRead.ExecuteReader();
+            SQLiteDataReader liteDataReader = commandRead.ExecuteReader();
+            //MySqlDataReader mySqlDataReader = mySqlCommandRead.ExecuteReader();
 
             //关闭read
-            mySqlCommandRead.Dispose();
+            commandRead.Dispose();
+            //mySqlCommandRead.Dispose();
 
             PictureBox[] pictureBoxes = new PictureBox[9];
             pictureBoxes[0] = wallpaper.pictureBox1;
@@ -729,20 +834,20 @@ namespace Trio
             textBoxes[7] = wallpaper.textBox8;
             textBoxes[8] = wallpaper.textBox9;
 
-            if (mySqlDataReader.HasRows)
+            if (liteDataReader.HasRows)
             {
                 int i = 0;
                 byte[] buffer = null;
-                while (mySqlDataReader.Read())
+                while (liteDataReader.Read())
                 {
-                    long len = mySqlDataReader.GetBytes(1, 0, null, 0, 0);
+                    long len = liteDataReader.GetBytes(1, 0, null, 0, 0);
                     buffer = new byte[len];
-                    len = mySqlDataReader.GetBytes(1, 0, buffer, 0, (int)len);
+                    len = liteDataReader.GetBytes(1, 0, buffer, 0, (int)len);
 
                     MemoryStream memoryStream = new MemoryStream(buffer);
                     Image image = Image.FromStream(memoryStream);
                     pictureBoxes[i].Image = image;
-                    textBoxes[i].Text = mySqlDataReader[0].ToString();
+                    textBoxes[i].Text = liteDataReader[0].ToString();
 
                     i++;
 
@@ -751,10 +856,12 @@ namespace Trio
             }
 
             //关闭reader
-            mySqlDataReader.Close();
+            liteDataReader.Close();
+            //mySqlDataReader.Close();
 
             //关闭连接
-            mySqlConnection.Close();
+            liteConnection.Close();
+            //mySqlConnection.Close();
 
         }
 
