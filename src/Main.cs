@@ -300,8 +300,16 @@ namespace Trio
             string imgId = imgInfo.Split(' ')[1];
             string imgURL = imgInfo.Split(' ')[0];
             string dirPath = savePath + "\\" + imgId + ".jpg";
-            WebClient webClient = new WebClient();
-            webClient.DownloadFile(imgURL, dirPath);
+            if (File.Exists(dirPath))
+            {
+                //do nothing
+            }
+            else
+            {
+                WebClient webClient = new WebClient();
+                webClient.DownloadFile(imgURL, dirPath);
+            }
+        
         }
 
         //声明wallpaper子窗体(公用)
