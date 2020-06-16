@@ -41,8 +41,8 @@
             this.btnSettings = new FontAwesome.Sharp.IconButton();
             this.btnSeat = new FontAwesome.Sharp.IconButton();
             this.pnlWallpaper = new System.Windows.Forms.Panel();
-            this.btnWallpaperEngine = new System.Windows.Forms.Button();
-            this.btnAnime = new System.Windows.Forms.Button();
+            this.btnBA = new System.Windows.Forms.Button();
+            this.btnSW = new System.Windows.Forms.Button();
             this.btnBing = new System.Windows.Forms.Button();
             this.btnWallpaper = new FontAwesome.Sharp.IconButton();
             this.pnlNews = new System.Windows.Forms.Panel();
@@ -55,7 +55,6 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.pnlChildForm = new System.Windows.Forms.Panel();
             this.picHome = new System.Windows.Forms.PictureBox();
-            this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picItem)).BeginInit();
             this.pnlSidemenu.SuspendLayout();
@@ -65,7 +64,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlChildForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHome)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTitle
@@ -79,9 +77,9 @@
             this.pnlTitle.Controls.Add(this.btnExit);
             this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitle.Location = new System.Drawing.Point(0, 0);
-            this.pnlTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTitle.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(947, 30);
+            this.pnlTitle.Size = new System.Drawing.Size(1184, 38);
             this.pnlTitle.TabIndex = 0;
             this.pnlTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlTitle_MouseDown);
             // 
@@ -93,11 +91,11 @@
             this.picItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.picItem.IconChar = FontAwesome.Sharp.IconChar.None;
             this.picItem.IconColor = System.Drawing.SystemColors.ControlText;
-            this.picItem.IconSize = 29;
-            this.picItem.Location = new System.Drawing.Point(19, 2);
-            this.picItem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picItem.IconSize = 36;
+            this.picItem.Location = new System.Drawing.Point(24, 2);
+            this.picItem.Margin = new System.Windows.Forms.Padding(2);
             this.picItem.Name = "picItem";
-            this.picItem.Size = new System.Drawing.Size(29, 29);
+            this.picItem.Size = new System.Drawing.Size(36, 36);
             this.picItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picItem.TabIndex = 6;
             this.picItem.TabStop = false;
@@ -105,10 +103,10 @@
             // lblTitle
             // 
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTitle.Location = new System.Drawing.Point(40, 1);
+            this.lblTitle.Location = new System.Drawing.Point(50, 1);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(58, 29);
+            this.lblTitle.Size = new System.Drawing.Size(72, 36);
             this.lblTitle.TabIndex = 5;
             this.lblTitle.Text = "Trio";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -121,10 +119,10 @@
             this.btnMax.FlatAppearance.BorderSize = 0;
             this.btnMax.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
             this.btnMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMax.Location = new System.Drawing.Point(861, 0);
-            this.btnMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMax.Location = new System.Drawing.Point(1076, 0);
+            this.btnMax.Margin = new System.Windows.Forms.Padding(2);
             this.btnMax.Name = "btnMax";
-            this.btnMax.Size = new System.Drawing.Size(43, 29);
+            this.btnMax.Size = new System.Drawing.Size(54, 36);
             this.btnMax.TabIndex = 1;
             this.btnMax.UseVisualStyleBackColor = true;
             this.btnMax.Click += new System.EventHandler(this.BtnMax_Click);
@@ -137,10 +135,10 @@
             this.btnRestore.FlatAppearance.BorderSize = 0;
             this.btnRestore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
             this.btnRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestore.Location = new System.Drawing.Point(861, 0);
-            this.btnRestore.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRestore.Location = new System.Drawing.Point(1076, 0);
+            this.btnRestore.Margin = new System.Windows.Forms.Padding(2);
             this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(43, 29);
+            this.btnRestore.Size = new System.Drawing.Size(54, 36);
             this.btnRestore.TabIndex = 3;
             this.btnRestore.UseVisualStyleBackColor = true;
             this.btnRestore.Click += new System.EventHandler(this.BtnRestore_Click);
@@ -153,10 +151,10 @@
             this.btnMin.FlatAppearance.BorderSize = 0;
             this.btnMin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
             this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMin.Location = new System.Drawing.Point(818, 0);
-            this.btnMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMin.Location = new System.Drawing.Point(1022, 0);
+            this.btnMin.Margin = new System.Windows.Forms.Padding(2);
             this.btnMin.Name = "btnMin";
-            this.btnMin.Size = new System.Drawing.Size(43, 29);
+            this.btnMin.Size = new System.Drawing.Size(54, 36);
             this.btnMin.TabIndex = 2;
             this.btnMin.UseVisualStyleBackColor = true;
             this.btnMin.Click += new System.EventHandler(this.BtnMin_Click);
@@ -169,10 +167,10 @@
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Location = new System.Drawing.Point(904, 0);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExit.Location = new System.Drawing.Point(1130, 0);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(43, 30);
+            this.btnExit.Size = new System.Drawing.Size(54, 38);
             this.btnExit.TabIndex = 0;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
@@ -190,10 +188,10 @@
             this.pnlSidemenu.Controls.Add(this.btnNews);
             this.pnlSidemenu.Controls.Add(this.pnlStatusBar);
             this.pnlSidemenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSidemenu.Location = new System.Drawing.Point(0, 30);
-            this.pnlSidemenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSidemenu.Location = new System.Drawing.Point(0, 38);
+            this.pnlSidemenu.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSidemenu.Name = "pnlSidemenu";
-            this.pnlSidemenu.Size = new System.Drawing.Size(200, 556);
+            this.pnlSidemenu.Size = new System.Drawing.Size(250, 694);
             this.pnlSidemenu.TabIndex = 1;
             // 
             // btnAbout
@@ -210,12 +208,12 @@
             this.btnAbout.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnAbout.IconSize = 45;
             this.btnAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAbout.Location = new System.Drawing.Point(0, 633);
-            this.btnAbout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAbout.Location = new System.Drawing.Point(0, 792);
+            this.btnAbout.Margin = new System.Windows.Forms.Padding(2);
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Padding = new System.Windows.Forms.Padding(12, 0, 24, 0);
+            this.btnAbout.Padding = new System.Windows.Forms.Padding(15, 0, 30, 0);
             this.btnAbout.Rotation = 0D;
-            this.btnAbout.Size = new System.Drawing.Size(183, 56);
+            this.btnAbout.Size = new System.Drawing.Size(229, 70);
             this.btnAbout.TabIndex = 7;
             this.btnAbout.Text = "About";
             this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -237,12 +235,12 @@
             this.btnSettings.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnSettings.IconSize = 45;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSettings.Location = new System.Drawing.Point(0, 577);
-            this.btnSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSettings.Location = new System.Drawing.Point(0, 722);
+            this.btnSettings.Margin = new System.Windows.Forms.Padding(2);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Padding = new System.Windows.Forms.Padding(12, 0, 24, 0);
+            this.btnSettings.Padding = new System.Windows.Forms.Padding(15, 0, 30, 0);
             this.btnSettings.Rotation = 0D;
-            this.btnSettings.Size = new System.Drawing.Size(183, 56);
+            this.btnSettings.Size = new System.Drawing.Size(229, 70);
             this.btnSettings.TabIndex = 6;
             this.btnSettings.Text = "Settings";
             this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -264,12 +262,12 @@
             this.btnSeat.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnSeat.IconSize = 45;
             this.btnSeat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeat.Location = new System.Drawing.Point(0, 521);
-            this.btnSeat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSeat.Location = new System.Drawing.Point(0, 652);
+            this.btnSeat.Margin = new System.Windows.Forms.Padding(2);
             this.btnSeat.Name = "btnSeat";
-            this.btnSeat.Padding = new System.Windows.Forms.Padding(12, 0, 24, 0);
+            this.btnSeat.Padding = new System.Windows.Forms.Padding(15, 0, 30, 0);
             this.btnSeat.Rotation = 0D;
-            this.btnSeat.Size = new System.Drawing.Size(183, 56);
+            this.btnSeat.Size = new System.Drawing.Size(229, 70);
             this.btnSeat.TabIndex = 5;
             this.btnSeat.Text = "Library Seat";
             this.btnSeat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -280,53 +278,53 @@
             // pnlWallpaper
             // 
             this.pnlWallpaper.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.pnlWallpaper.Controls.Add(this.btnWallpaperEngine);
-            this.pnlWallpaper.Controls.Add(this.btnAnime);
+            this.pnlWallpaper.Controls.Add(this.btnBA);
+            this.pnlWallpaper.Controls.Add(this.btnSW);
             this.pnlWallpaper.Controls.Add(this.btnBing);
             this.pnlWallpaper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlWallpaper.Location = new System.Drawing.Point(0, 387);
-            this.pnlWallpaper.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlWallpaper.Location = new System.Drawing.Point(0, 484);
+            this.pnlWallpaper.Margin = new System.Windows.Forms.Padding(2);
             this.pnlWallpaper.Name = "pnlWallpaper";
-            this.pnlWallpaper.Size = new System.Drawing.Size(183, 134);
+            this.pnlWallpaper.Size = new System.Drawing.Size(229, 168);
             this.pnlWallpaper.TabIndex = 4;
             // 
-            // btnWallpaperEngine
+            // btnBA
             // 
-            this.btnWallpaperEngine.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnWallpaperEngine.FlatAppearance.BorderSize = 0;
-            this.btnWallpaperEngine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnWallpaperEngine.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnWallpaperEngine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWallpaperEngine.ForeColor = System.Drawing.Color.Black;
-            this.btnWallpaperEngine.Location = new System.Drawing.Point(0, 90);
-            this.btnWallpaperEngine.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnWallpaperEngine.Name = "btnWallpaperEngine";
-            this.btnWallpaperEngine.Padding = new System.Windows.Forms.Padding(48, 0, 0, 0);
-            this.btnWallpaperEngine.Size = new System.Drawing.Size(183, 45);
-            this.btnWallpaperEngine.TabIndex = 2;
-            this.btnWallpaperEngine.Text = "Wallpaper Engine";
-            this.btnWallpaperEngine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnWallpaperEngine.UseVisualStyleBackColor = true;
-            this.btnWallpaperEngine.Click += new System.EventHandler(this.BtnWallpaperEngine_Click);
+            this.btnBA.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBA.FlatAppearance.BorderSize = 0;
+            this.btnBA.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnBA.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnBA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBA.ForeColor = System.Drawing.Color.Black;
+            this.btnBA.Location = new System.Drawing.Point(0, 112);
+            this.btnBA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBA.Name = "btnBA";
+            this.btnBA.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnBA.Size = new System.Drawing.Size(229, 56);
+            this.btnBA.TabIndex = 2;
+            this.btnBA.Text = "彼岸图网";
+            this.btnBA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBA.UseVisualStyleBackColor = true;
+            this.btnBA.Click += new System.EventHandler(this.BtnBA_Click);
             // 
-            // btnAnime
+            // btnSW
             // 
-            this.btnAnime.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAnime.FlatAppearance.BorderSize = 0;
-            this.btnAnime.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnAnime.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnAnime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAnime.ForeColor = System.Drawing.Color.Black;
-            this.btnAnime.Location = new System.Drawing.Point(0, 45);
-            this.btnAnime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnAnime.Name = "btnAnime";
-            this.btnAnime.Padding = new System.Windows.Forms.Padding(48, 0, 0, 0);
-            this.btnAnime.Size = new System.Drawing.Size(183, 45);
-            this.btnAnime.TabIndex = 1;
-            this.btnAnime.Text = "Anime";
-            this.btnAnime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAnime.UseVisualStyleBackColor = true;
-            this.btnAnime.Click += new System.EventHandler(this.BtnAnime_Click);
+            this.btnSW.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSW.FlatAppearance.BorderSize = 0;
+            this.btnSW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnSW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSW.ForeColor = System.Drawing.Color.Black;
+            this.btnSW.Location = new System.Drawing.Point(0, 56);
+            this.btnSW.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSW.Name = "btnSW";
+            this.btnSW.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnSW.Size = new System.Drawing.Size(229, 56);
+            this.btnSW.TabIndex = 1;
+            this.btnSW.Text = "StreetWill";
+            this.btnSW.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSW.UseVisualStyleBackColor = true;
+            this.btnSW.Click += new System.EventHandler(this.BtnSW_Click);
             // 
             // btnBing
             // 
@@ -338,10 +336,10 @@
             this.btnBing.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnBing.ForeColor = System.Drawing.Color.Black;
             this.btnBing.Location = new System.Drawing.Point(0, 0);
-            this.btnBing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBing.Margin = new System.Windows.Forms.Padding(2);
             this.btnBing.Name = "btnBing";
-            this.btnBing.Padding = new System.Windows.Forms.Padding(48, 0, 0, 0);
-            this.btnBing.Size = new System.Drawing.Size(183, 45);
+            this.btnBing.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnBing.Size = new System.Drawing.Size(229, 56);
             this.btnBing.TabIndex = 0;
             this.btnBing.Text = "Bing";
             this.btnBing.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -362,12 +360,12 @@
             this.btnWallpaper.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnWallpaper.IconSize = 45;
             this.btnWallpaper.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnWallpaper.Location = new System.Drawing.Point(0, 331);
-            this.btnWallpaper.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnWallpaper.Location = new System.Drawing.Point(0, 414);
+            this.btnWallpaper.Margin = new System.Windows.Forms.Padding(2);
             this.btnWallpaper.Name = "btnWallpaper";
-            this.btnWallpaper.Padding = new System.Windows.Forms.Padding(12, 0, 24, 0);
+            this.btnWallpaper.Padding = new System.Windows.Forms.Padding(15, 0, 30, 0);
             this.btnWallpaper.Rotation = 0D;
-            this.btnWallpaper.Size = new System.Drawing.Size(183, 56);
+            this.btnWallpaper.Size = new System.Drawing.Size(229, 70);
             this.btnWallpaper.TabIndex = 3;
             this.btnWallpaper.Text = "Wallpaper";
             this.btnWallpaper.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -383,10 +381,10 @@
             this.pnlNews.Controls.Add(this.btnBkjw);
             this.pnlNews.Controls.Add(this.btnWhu);
             this.pnlNews.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNews.Location = new System.Drawing.Point(0, 152);
-            this.pnlNews.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlNews.Location = new System.Drawing.Point(0, 190);
+            this.pnlNews.Margin = new System.Windows.Forms.Padding(2);
             this.pnlNews.Name = "pnlNews";
-            this.pnlNews.Size = new System.Drawing.Size(183, 179);
+            this.pnlNews.Size = new System.Drawing.Size(229, 224);
             this.pnlNews.TabIndex = 2;
             // 
             // btnReadingList
@@ -397,11 +395,11 @@
             this.btnReadingList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnReadingList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReadingList.ForeColor = System.Drawing.Color.Black;
-            this.btnReadingList.Location = new System.Drawing.Point(0, 135);
-            this.btnReadingList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReadingList.Location = new System.Drawing.Point(0, 168);
+            this.btnReadingList.Margin = new System.Windows.Forms.Padding(2);
             this.btnReadingList.Name = "btnReadingList";
-            this.btnReadingList.Padding = new System.Windows.Forms.Padding(48, 0, 0, 0);
-            this.btnReadingList.Size = new System.Drawing.Size(183, 45);
+            this.btnReadingList.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnReadingList.Size = new System.Drawing.Size(229, 56);
             this.btnReadingList.TabIndex = 3;
             this.btnReadingList.Text = "Reading List";
             this.btnReadingList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -416,11 +414,11 @@
             this.btnCs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnCs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCs.ForeColor = System.Drawing.Color.Black;
-            this.btnCs.Location = new System.Drawing.Point(0, 90);
-            this.btnCs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCs.Location = new System.Drawing.Point(0, 112);
+            this.btnCs.Margin = new System.Windows.Forms.Padding(2);
             this.btnCs.Name = "btnCs";
-            this.btnCs.Padding = new System.Windows.Forms.Padding(48, 0, 0, 0);
-            this.btnCs.Size = new System.Drawing.Size(183, 45);
+            this.btnCs.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnCs.Size = new System.Drawing.Size(229, 56);
             this.btnCs.TabIndex = 2;
             this.btnCs.Text = "Faculty";
             this.btnCs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -435,11 +433,11 @@
             this.btnBkjw.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnBkjw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBkjw.ForeColor = System.Drawing.Color.Black;
-            this.btnBkjw.Location = new System.Drawing.Point(0, 45);
-            this.btnBkjw.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBkjw.Location = new System.Drawing.Point(0, 56);
+            this.btnBkjw.Margin = new System.Windows.Forms.Padding(2);
             this.btnBkjw.Name = "btnBkjw";
-            this.btnBkjw.Padding = new System.Windows.Forms.Padding(48, 0, 0, 0);
-            this.btnBkjw.Size = new System.Drawing.Size(183, 45);
+            this.btnBkjw.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnBkjw.Size = new System.Drawing.Size(229, 56);
             this.btnBkjw.TabIndex = 1;
             this.btnBkjw.Text = "BKJW";
             this.btnBkjw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -456,10 +454,10 @@
             this.btnWhu.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnWhu.ForeColor = System.Drawing.Color.Black;
             this.btnWhu.Location = new System.Drawing.Point(0, 0);
-            this.btnWhu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnWhu.Margin = new System.Windows.Forms.Padding(2);
             this.btnWhu.Name = "btnWhu";
-            this.btnWhu.Padding = new System.Windows.Forms.Padding(48, 0, 0, 0);
-            this.btnWhu.Size = new System.Drawing.Size(183, 45);
+            this.btnWhu.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
+            this.btnWhu.Size = new System.Drawing.Size(229, 56);
             this.btnWhu.TabIndex = 0;
             this.btnWhu.Text = "WHU";
             this.btnWhu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -480,12 +478,12 @@
             this.btnNews.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(125)))), ((int)(((byte)(136)))));
             this.btnNews.IconSize = 45;
             this.btnNews.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNews.Location = new System.Drawing.Point(0, 96);
-            this.btnNews.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNews.Location = new System.Drawing.Point(0, 120);
+            this.btnNews.Margin = new System.Windows.Forms.Padding(2);
             this.btnNews.Name = "btnNews";
-            this.btnNews.Padding = new System.Windows.Forms.Padding(12, 0, 24, 0);
+            this.btnNews.Padding = new System.Windows.Forms.Padding(15, 0, 30, 0);
             this.btnNews.Rotation = 0D;
-            this.btnNews.Size = new System.Drawing.Size(183, 56);
+            this.btnNews.Size = new System.Drawing.Size(229, 70);
             this.btnNews.TabIndex = 1;
             this.btnNews.Text = "News";
             this.btnNews.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -498,9 +496,9 @@
             this.pnlStatusBar.Controls.Add(this.picLogo);
             this.pnlStatusBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlStatusBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlStatusBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlStatusBar.Margin = new System.Windows.Forms.Padding(2);
             this.pnlStatusBar.Name = "pnlStatusBar";
-            this.pnlStatusBar.Size = new System.Drawing.Size(183, 96);
+            this.pnlStatusBar.Size = new System.Drawing.Size(229, 120);
             this.pnlStatusBar.TabIndex = 0;
             this.pnlStatusBar.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlStatusBar_Paint);
             // 
@@ -508,10 +506,10 @@
             // 
             this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.Location = new System.Drawing.Point(21, 17);
-            this.picLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLogo.Location = new System.Drawing.Point(27, 21);
+            this.picLogo.Margin = new System.Windows.Forms.Padding(2);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(141, 63);
+            this.picLogo.Size = new System.Drawing.Size(176, 79);
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picLogo.TabIndex = 0;
             this.picLogo.TabStop = false;
@@ -519,13 +517,12 @@
             // 
             // pnlChildForm
             // 
-            this.pnlChildForm.Controls.Add(this.iconPictureBox1);
             this.pnlChildForm.Controls.Add(this.picHome);
             this.pnlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlChildForm.Location = new System.Drawing.Point(200, 30);
-            this.pnlChildForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlChildForm.Location = new System.Drawing.Point(250, 38);
+            this.pnlChildForm.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChildForm.Name = "pnlChildForm";
-            this.pnlChildForm.Size = new System.Drawing.Size(747, 556);
+            this.pnlChildForm.Size = new System.Drawing.Size(934, 694);
             this.pnlChildForm.TabIndex = 2;
             // 
             // picHome
@@ -533,40 +530,28 @@
             this.picHome.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picHome.BackColor = System.Drawing.Color.White;
             this.picHome.Image = ((System.Drawing.Image)(resources.GetObject("picHome.Image")));
-            this.picHome.Location = new System.Drawing.Point(162, 171);
-            this.picHome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picHome.Location = new System.Drawing.Point(202, 214);
+            this.picHome.Margin = new System.Windows.Forms.Padding(2);
             this.picHome.Name = "picHome";
-            this.picHome.Size = new System.Drawing.Size(460, 173);
+            this.picHome.Size = new System.Drawing.Size(575, 216);
             this.picHome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picHome.TabIndex = 0;
             this.picHome.TabStop = false;
             // 
-            // iconPictureBox1
-            // 
-            this.iconPictureBox1.BackColor = System.Drawing.Color.White;
-            this.iconPictureBox1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlText;
-            this.iconPictureBox1.Location = new System.Drawing.Point(315, 224);
-            this.iconPictureBox1.Name = "iconPictureBox1";
-            this.iconPictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.iconPictureBox1.TabIndex = 1;
-            this.iconPictureBox1.TabStop = false;
-            // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(947, 586);
+            this.ClientSize = new System.Drawing.Size(1184, 732);
             this.Controls.Add(this.pnlChildForm);
             this.Controls.Add(this.pnlSidemenu);
             this.Controls.Add(this.pnlTitle);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MinimumSize = new System.Drawing.Size(947, 586);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(1184, 732);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trio";
@@ -579,7 +564,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlChildForm.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picHome)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -604,15 +588,14 @@
         private System.Windows.Forms.Button btnCs;
         private System.Windows.Forms.Button btnBkjw;
         private System.Windows.Forms.Panel pnlWallpaper;
-        private System.Windows.Forms.Button btnWallpaperEngine;
-        private System.Windows.Forms.Button btnAnime;
+        private System.Windows.Forms.Button btnBA;
+        private System.Windows.Forms.Button btnSW;
         private System.Windows.Forms.Button btnBing;
         private FontAwesome.Sharp.IconButton btnWallpaper;
         private FontAwesome.Sharp.IconButton btnAbout;
         private FontAwesome.Sharp.IconButton btnSeat;
         private FontAwesome.Sharp.IconButton btnSettings;
         private System.Windows.Forms.PictureBox picHome;
-        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }
 
