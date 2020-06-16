@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
@@ -25,6 +26,7 @@ namespace Trio
         private Form activeForm = null;
         private Panel leftBorderBtn;
 
+        private Thread ldn;
         private List<string> whuNewsTitle = new List<string>();
         private Dictionary<string, string> whuNewsUrl = new Dictionary<string, string>();
         private List<string> bkNewsTitle = new List<string>();
@@ -76,13 +78,9 @@ namespace Trio
             MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;  //防止最大化覆盖任务栏
 
             //先爬新闻标题
-            GetNews getNews = new GetNews();
-            whuNewsTitle = getNews.whuNewsTitle;
-            whuNewsUrl = getNews.whuNewsUrl;
-            bkNewsTitle = getNews.bkNewsTitle;
-            bkNewsUrl = getNews.bkNewsUrl;
-            csNewsTitle = getNews.csNewsTitle;
-            csNewsUrl = getNews.csNewsUrl;
+            ldn = new Thread(loadNews);
+            ldn.Start();
+
 
             //每次打开看一下数据库文件在不在
             if (!File.Exists("newstb.sqlite"))
@@ -194,8 +192,19 @@ namespace Trio
         #endregion
 
         #region 新闻菜单的响应事件
+        void loadNews()
+        {
+            GetNews getNews = new GetNews();
+            whuNewsTitle = getNews.whuNewsTitle;
+            whuNewsUrl = getNews.whuNewsUrl;
+            bkNewsTitle = getNews.bkNewsTitle;
+            bkNewsUrl = getNews.bkNewsUrl;
+            csNewsTitle = getNews.csNewsTitle;
+            csNewsUrl = getNews.csNewsUrl;
+        }
         private void BtnNews_Click(object sender, EventArgs e)
         {
+            
             ResetButton(null);
             ShowSubMenu(pnlNews);
             CloseActiveForm(true);
@@ -210,6 +219,8 @@ namespace Trio
             getNews.getWhuTitle();
             whuNewsTitle = getNews.newsTitle;
             whuNewsUrl = getNews.newsUrl;*/
+
+            ldn.Join();  //阻塞
 
             Forms.News news = new Forms.News(whuNewsTitle, whuNewsUrl);
             Forms.News.main = main;
@@ -226,6 +237,8 @@ namespace Trio
             bkNewsTitle = getNews.newsTitle;
             bkNewsUrl = getNews.newsUrl;*/
 
+            ldn.Join();  //阻塞
+
             Forms.News news = new Forms.News(bkNewsTitle, bkNewsUrl);
             Forms.News.main = main;
             OpenChildForm(news);
@@ -241,6 +254,8 @@ namespace Trio
             getNews.getCsTitle();
             csNewsTitle = getNews.newsTitle;
             csNewsUrl = getNews.newsUrl;*/
+
+            ldn.Join();  //阻塞
 
             Forms.News news = new Forms.News(csNewsTitle, csNewsUrl);
             Forms.News.main = main;

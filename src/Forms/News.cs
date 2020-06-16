@@ -19,64 +19,69 @@ namespace Trio.Forms
     {
         public static Main main;
         public static News news;
-        private List<IconButton> buttons = new List<IconButton>();
-        private List<IconButton> WLButtons = new List<IconButton>();  //watch later 按钮
+        //private List<IconButton> buttons = new List<IconButton>();
+        //private List<IconButton> WLButtons = new List<IconButton>();  //watch later 按钮
 
         public List<string> newsTitle = new List<string>();
-        public Dictionary<string, string> newsUrl = new Dictionary<string, string>();
+        public Dictionary<string, string> newsUrl = new Dictionary<string, string>();  //title,url
 
-        public News()
+        public News() 
         {
             InitializeComponent();
         }
-        public News(List<string> newsTitle, Dictionary<string, string> newsUrl)   //新闻列表
+        public News(List<string> newsTitle, Dictionary<string, string> newsUrl)   //新闻列表  从三个按钮进入
         {
+            //字典初始化
+            this.newsTitle = newsTitle;
+            this.newsUrl = newsUrl;
+
             InitializeComponent();
-            flowLayoutPanel3.Hide();
+            webBrowser.Hide();
+            //提示框
+            ToolTip toolTip = new ToolTip();
+            toolTip.IsBalloon = true;
+
             foreach (var title in newsTitle)
             {
                 IconButton button = new IconButton();
-                button.Size = new Size(flowLayoutPanel1.Size.Width - 100, 50);
+                button.Size = new Size(flowLayoutPanel1.Size.Width - 50, 50);
                 button.Text = title;
-                button.Click += delegate { buttonClick(newsUrl[title]); };
+                button.MouseDown += buttonClick;
+                toolTip.SetToolTip(button, "左键进入新闻，右键加入待看列表");
                 flowLayoutPanel1.Controls.Add(button);
                 //buttons.Add(button);
-
-                button = new IconButton();
-                button.Size = new Size(50, 50);
-                button.Click += delegate { WLButtonClick(title, newsUrl[title]); };
-                flowLayoutPanel1.Controls.Add(button);
             }
         }
-        public News(List<string> newsTitle, Dictionary<string, string> newsUrl, bool WL)
+        public News(List<string> newsTitle, Dictionary<string, string> newsUrl, bool WL)   //新闻列表  从待看列表中进入
         {
+            //字典初始化
+            this.newsTitle = newsTitle;
+            this.newsUrl = newsUrl;
+
             InitializeComponent();
-            flowLayoutPanel3.Hide();
-            label2.Text = "取消稍后再看";
+            webBrowser.Hide();
+            //提示框
+            ToolTip toolTip = new ToolTip();
+            toolTip.IsBalloon = true;
+
             foreach (var title in newsTitle)
             {
                 IconButton button = new IconButton();
-                button.Size = new Size(flowLayoutPanel1.Size.Width - 100, 50);
+                button.Size = new Size(flowLayoutPanel1.Size.Width - 50, 50);
                 button.Text = title;
-                button.Click += delegate { buttonClick(newsUrl[title]); };
+                button.MouseDown += WLButtonClick;
+                toolTip.SetToolTip(button, "左键进入新闻，右键从待看列表中删除");
                 flowLayoutPanel1.Controls.Add(button);
                 //buttons.Add(button);
-
-                button = new IconButton();
-                button.Size = new Size(50, 50);
-                button.Click += delegate { DWLButtonClick(title, newsUrl[title]); };
-                flowLayoutPanel1.Controls.Add(button);
             }
         }
         public News(string url)   //打开新闻内容页
         {
             InitializeComponent();
-            WebBrowser webBrowser = new WebBrowser();
-            webBrowser.Size = flowLayoutPanel3.Size;
+            
             flowLayoutPanel1.Hide();
-            //flowLayoutPanel2.Hide();
+            label1.Hide();
 
-            flowLayoutPanel3.Controls.Add(webBrowser);
             try
             {
                 webBrowser.Navigate(url);
@@ -87,17 +92,41 @@ namespace Trio.Forms
             }
         }
 
-        private void buttonClick(string url)  //进入新闻页
+        private void mouseEnter(object sender, MouseEventArgs e)
         {
-            
-            Forms.News news = new Forms.News(url);
-            main.OpenChildForm(news);
+
         }
-        private void WLButtonClick(string title, string url)  //加入待看列表
+        private void buttonClick(object sender, MouseEventArgs e)  //进入新闻页
         {
-            /*string connstr = "data source=localhost; " +
-                "database=newsTB; user id=root;password=1011;" +
-                "pooling=false;charset=utf8";//pooling代表是否使用连接池*/
+
+            Button b = (Button)sender;
+            if(e.Button == MouseButtons.Left)  //左键开新闻页
+            {
+                Forms.News news = new Forms.News(newsUrl[b.Text]);
+                main.OpenChildForm(news);
+            }
+            else   ////加入待看列表
+            {
+                addWL(b.Text, newsUrl[b.Text]);
+            }
+                
+        }
+        private void WLButtonClick(object sender, MouseEventArgs e)  //进入新闻页
+        {
+            Button b = (Button)sender;
+            if (e.Button == MouseButtons.Left)  //左键开新闻页
+            {
+                Forms.News news = new Forms.News(newsUrl[b.Text]);
+                main.OpenChildForm(news);
+            }
+            else   ////从待看列表中删除
+            {
+                delWL(b.Text, newsUrl[b.Text]);
+            }
+
+        }
+        private void addWL(string title, string url)  //加入待看列表
+        {
             string connstr = "Data Source=newstb.sqlite;Version=3;";
             //插入到数据库
             using (SQLiteConnection connection = new SQLiteConnection(connstr))
@@ -116,7 +145,7 @@ namespace Trio.Forms
                 }
             }
         }
-        private void DWLButtonClick(string title, string url)   //从待看列表中删除
+        private void delWL(string title, string url)   //从待看列表中删除
         {
             string connstr = "Data Source=newstb.sqlite;Version=3;";
             //删除数据库记录
@@ -178,6 +207,11 @@ namespace Trio.Forms
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlOptions_Paint(object sender, PaintEventArgs e)
         {
 
         }
