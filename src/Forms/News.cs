@@ -107,12 +107,19 @@ namespace Trio.Forms
             {
                 flowLayoutPanel1.Hide();
                 PictureBox pictureBox = new PictureBox();
+                
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
-                //pictureBox.Dock = DockStyle.Bottom;
-                pictureBox.Location = flowLayoutPanel1.Location;
-                pictureBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Top;
-                //pictureBox.Size = new Size(200, 200);
-                pictureBox.Load(@"./assets/什么都没有.jpg");
+                try
+                {
+                    pictureBox.Load(@"./assets/404.jpg");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    //throw;
+                }
+                pictureBox.Location = new Point(this.Width / 2 - pictureBox.Size.Width / 2,
+                    this.Height / 2 - pictureBox.Size.Height / 2);
                 this.Controls.Add(pictureBox);
             }
         }
@@ -191,6 +198,7 @@ namespace Trio.Forms
         private void circularButton3Click()
         {
             flowLayoutPanel1.Controls.Clear();
+            bool check = true;
             //提示框
             ToolTip toolTip = new ToolTip();
             foreach (var title in newsTitle)
@@ -198,7 +206,29 @@ namespace Trio.Forms
                 if (title.Item2 == "学术")
                 {
                     addButton(title.Item1, newsUrl[title.Item1]);
+                    check = false;
                 }
+            }
+            //学术按钮要特判
+            if(check)
+            {
+                flowLayoutPanel1.Hide();
+                PictureBox pictureBox = new PictureBox();
+
+                pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+                try
+                {
+                    pictureBox.Load(@"./assets/404.jpg");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    //throw;
+                }
+                
+                pictureBox.Location = new Point(this.Width / 2 - pictureBox.Size.Width / 2,
+                    this.Height / 2 - pictureBox.Size.Height / 2);
+                this.Controls.Add(pictureBox);
             }
         }
         private void buttonClick(object sender, MouseEventArgs e)  //点击标题进入新闻页
