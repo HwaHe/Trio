@@ -84,10 +84,10 @@ namespace Trio
             HtmlDocument pagedoc = getHtml(url);
             string newsxpath = @"//div[@class = 'news']//li/a";
             var nodes = pagedoc.DocumentNode.SelectNodes(newsxpath);
-            foreach (var node in nodes)  //通知类
+            foreach (var node in nodes)  //新闻类
             {
                 string title = node.InnerText;
-                bkNewsTitle.Add((title, "通知"));
+                bkNewsTitle.Add((title, "新闻"));
                 string href = node.GetAttributeValue("href", "");  //下一级的链接
                 href = url + href;
                 bkNewsUrl.Add(title, href);
@@ -95,10 +95,10 @@ namespace Trio
 
             newsxpath = @"//div[@class = 'notice']//li/a";
             nodes = pagedoc.DocumentNode.SelectNodes(newsxpath);
-            foreach (var node in nodes)   //新闻类
+            foreach (var node in nodes)   //通知类
             {
                 string title = node.InnerText;
-                bkNewsTitle.Add((title, "新闻"));
+                bkNewsTitle.Add((title, "通知"));
                 string href = node.GetAttributeValue("href", "");  //下一级的链接
                 href = url + href;
                 bkNewsUrl.Add(title, href);

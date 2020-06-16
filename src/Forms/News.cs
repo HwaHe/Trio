@@ -70,17 +70,20 @@ namespace Trio.Forms
             this.newsUrl = newsUrl;
 
             InitializeComponent();
-           
+
             //提示框
             //ToolTip toolTip = new ToolTip();
             //toolTip.IsBalloon = true;
 
+            tableLayoutPanel1.RowCount = newsTitle.Count;
             foreach (var title in newsTitle)
             {
                 string url = newsUrl[title];
                 IconButton button = new IconButton();
-                button.Size = new Size(flowLayoutPanel1.Size.Width - 10, 50);
+                //button.Size = new Size(tableLayoutPanel1.Size.Width - 10, 50);
+                button.Size = new Size(930, 50);
                 button.Text = title;
+                button.Anchor = AnchorStyles.Top;
                 button.MouseDown += buttonClick;
                 toolTip.SetToolTip(button, "左键进入新闻，右键从待看列表中删除");
 
@@ -99,15 +102,14 @@ namespace Trio.Forms
                 toolStripMenuItem1,
                 toolStripMenuItem2,});
 
-                flowLayoutPanel1.Controls.Add(button);
+                tableLayoutPanel1.Controls.Add(button);
                 //buttons.Add(button);
             }
             
             if(newsTitle.Count == 0)
             {
-                flowLayoutPanel1.Hide();
+                tableLayoutPanel1.RowCount = 1;
                 PictureBox pictureBox = new PictureBox();
-                
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
                 try
                 {
@@ -118,9 +120,9 @@ namespace Trio.Forms
                     MessageBox.Show(e.Message);
                     //throw;
                 }
-                pictureBox.Location = new Point(this.Width / 2 - pictureBox.Size.Width / 2,
-                    this.Height / 2 - pictureBox.Size.Height / 2);
-                this.Controls.Add(pictureBox);
+                pictureBox.Anchor = AnchorStyles.None;
+                tableLayoutPanel1.Controls.Add(pictureBox);
+                
             }
         }
         public News(string url)   //打开新闻内容页
@@ -129,9 +131,9 @@ namespace Trio.Forms
             //添加前进后退按钮
 
 
-            flowLayoutPanel1.Hide();
+            tableLayoutPanel1.Hide();
             WebBrowser webBrowser = new WebBrowser();
-            webBrowser.Size = flowLayoutPanel1.Size;
+            webBrowser.Size = tableLayoutPanel1.Size;
             webBrowser.Dock = DockStyle.Fill;
             //webBrowser.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             this.Controls.Add(webBrowser);
@@ -171,9 +173,19 @@ namespace Trio.Forms
         
         private void circularButton1Click()
         {
-            flowLayoutPanel1.Controls.Clear();
-           //提示框
-            ToolTip toolTip = new ToolTip();
+            tableLayoutPanel1.Controls.Clear();
+            int cnt = 0;
+            foreach (var title in newsTitle)
+            {
+                if (title.Item2 == "新闻")
+                {
+                    cnt++;
+                }
+            }
+            if(cnt > 0 )
+            {
+                tableLayoutPanel1.RowCount = cnt;
+            }
             foreach (var title in newsTitle)
             {
                 if(title.Item2 == "新闻")
@@ -184,9 +196,20 @@ namespace Trio.Forms
         }
         private void circularButton2Click()
         {
-            flowLayoutPanel1.Controls.Clear();
-            //提示框
+            tableLayoutPanel1.Controls.Clear();
             
+            int cnt = 0;
+            foreach (var title in newsTitle)
+            {
+                if (title.Item2 == "通知")
+                {
+                    cnt++;
+                }
+            }
+            if (cnt > 0)
+            {
+                tableLayoutPanel1.RowCount = cnt;
+            }
             foreach (var title in newsTitle)
             {
                 if (title.Item2 == "通知")
@@ -197,24 +220,32 @@ namespace Trio.Forms
         }
         private void circularButton3Click()
         {
-            flowLayoutPanel1.Controls.Clear();
-            bool check = true;
-            //提示框
-            ToolTip toolTip = new ToolTip();
+            tableLayoutPanel1.Controls.Clear();
+            int cnt = 0;
             foreach (var title in newsTitle)
             {
                 if (title.Item2 == "学术")
                 {
-                    addButton(title.Item1, newsUrl[title.Item1]);
-                    check = false;
+                    cnt++;
+                }
+            }
+            if (cnt > 0)
+            {
+                tableLayoutPanel1.RowCount = cnt;
+            }
+            foreach (var title in newsTitle)
+            {
+                if (title.Item2 == "学术")
+                {
+                    addButton(title.Item1, newsUrl[title.Item1]);                  
                 }
             }
             //学术按钮要特判
-            if(check)
+            if(cnt == 0)
             {
-                flowLayoutPanel1.Hide();
+                tableLayoutPanel1.RowCount = 1;
+                //tableLayoutPanel1.Hide();
                 PictureBox pictureBox = new PictureBox();
-
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
                 try
                 {
@@ -225,10 +256,8 @@ namespace Trio.Forms
                     MessageBox.Show(e.Message);
                     //throw;
                 }
-                
-                pictureBox.Location = new Point(this.Width / 2 - pictureBox.Size.Width / 2,
-                    this.Height / 2 - pictureBox.Size.Height / 2);
-                this.Controls.Add(pictureBox);
+                pictureBox.Anchor = AnchorStyles.Top;
+                tableLayoutPanel1.Controls.Add(pictureBox);
             }
         }
         private void buttonClick(object sender, MouseEventArgs e)  //点击标题进入新闻页
@@ -262,10 +291,10 @@ namespace Trio.Forms
         }
         private void addButton(string title, string url)   //添加标题的按钮
         {
-
             IconButton button = new IconButton();
-            button.Size = new Size(flowLayoutPanel1.Size.Width - 10, 50);
+            button.Size = new Size(930, 50);
             button.Text = title;
+            button.Anchor = AnchorStyles.Top;
             button.MouseDown += buttonClick;
 
             //ToolTip toolTip = new ToolTip();
@@ -286,7 +315,9 @@ namespace Trio.Forms
             toolStripMenuItem1,
             toolStripMenuItem2,});
 
-            flowLayoutPanel1.Controls.Add(button);
+            tableLayoutPanel1.Controls.Add(button);
+            
+            //button.Anchor = AnchorStyles.Left | AnchorStyles.Right; 
         }
         private void addWL(string title, string url)  //加入待看列表
         {
