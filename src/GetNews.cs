@@ -51,9 +51,9 @@ namespace Trio
             HtmlDocument pagedoc = getHtml(url);
             string newsxpath = @"//div[@class = 'col-sm-4']//li/a";
             var nodes = pagedoc.DocumentNode.SelectNodes(newsxpath);
-            for (int i = 0; i != 8; ++i)  //只有前8个是新闻
+            foreach (var node in nodes)
             {
-                var node = nodes[i];
+                //var node = nodes[i];
                 string title = node.InnerText;
                 whuNewsTitle.Add(title);
                 string href=node.GetAttributeValue("href", "");  //下一级的链接
