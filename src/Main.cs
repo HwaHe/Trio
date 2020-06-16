@@ -29,13 +29,13 @@ namespace Trio
         private Panel leftBorderBtn;
 
         private Thread ldn;
-        private List<string> whuNewsTitle = new List<string>();
-        private Dictionary<string, string> whuNewsUrl = new Dictionary<string, string>();
-        private List<string> bkNewsTitle = new List<string>();
-        private Dictionary<string, string> bkNewsUrl = new Dictionary<string, string>();
-        private List<string> csNewsTitle = new List<string>();
-        private Dictionary<string, string> csNewsUrl = new Dictionary<string, string>();
-        
+        public List<(string, string)> whuNewsTitle = new List<(string, string)>();
+        public Dictionary<string, string> whuNewsUrl = new Dictionary<string, string>();
+        public List<(string, string)> bkNewsTitle = new List<(string, string)>();
+        public Dictionary<string, string> bkNewsUrl = new Dictionary<string, string>();
+        public List<(string, string)> csNewsTitle = new List<(string, string)>();
+        public Dictionary<string, string> csNewsUrl = new Dictionary<string, string>();
+
 
 
         private struct RGBColors
@@ -95,7 +95,7 @@ namespace Trio
                     string command = "create table newstable(title varchar(500) NOT NULL,url varchar(1000) NOT NULL,primary key(url))";
                     SQLiteCommand cmd = new SQLiteCommand(command, connection);
                     cmd.ExecuteNonQuery();
-                }          
+                }
             }
         }
 
