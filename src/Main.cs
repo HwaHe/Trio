@@ -711,9 +711,7 @@ namespace Trio
                     Image image = Image.FromStream(memoryStream);
                     pictureBoxes[i].Image = image;
                     textBoxes[i].Text = liteDataReader[0].ToString();
-
                     i++;
-
                 }
 
             }

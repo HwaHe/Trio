@@ -297,7 +297,7 @@
             this.btnBA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBA.ForeColor = System.Drawing.Color.Black;
             this.btnBA.Location = new System.Drawing.Point(0, 112);
-            this.btnBA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBA.Margin = new System.Windows.Forms.Padding(4);
             this.btnBA.Name = "btnBA";
             this.btnBA.Padding = new System.Windows.Forms.Padding(60, 0, 0, 0);
             this.btnBA.Size = new System.Drawing.Size(229, 56);
@@ -518,7 +518,7 @@
             // pnlChildForm
             // 
             this.pnlChildForm.Controls.Add(this.picHome);
-            this.pnlChildForm.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlChildForm.Location = new System.Drawing.Point(250, 38);
             this.pnlChildForm.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChildForm.Name = "pnlChildForm";

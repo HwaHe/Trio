@@ -129,13 +129,12 @@ namespace Trio.Forms
         {
             InitializeComponent();
             //添加前进后退按钮
-
-
             tableLayoutPanel1.Hide();
             WebBrowser webBrowser = new WebBrowser();
+            //webBrowser.Size = new Size(this.Width, this.Height - this.pnlOptions.Height);
             webBrowser.Size = tableLayoutPanel1.Size;
             webBrowser.Dock = DockStyle.Fill;
-            //webBrowser.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            //webBrowser.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             this.Controls.Add(webBrowser);
             try
             {
@@ -149,7 +148,6 @@ namespace Trio.Forms
 
         private void addCircularButton()   //三个圆角按钮
         {
-            int width = 150;
             
             circularButton1.Text = "新闻";
             circularButton1.Size = new Size(90, 45);
