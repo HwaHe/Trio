@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -21,6 +22,21 @@ namespace Trio
         private IconButton currentBtn;
         private Form activeForm = null;
         private Panel leftBorderBtn;
+        private string homeDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Trio", wallPaperDir;
+
+        public string HomeDir{
+            get => homeDir;
+            set
+            {
+                homeDir = value;
+                CreateDir();
+            }
+        }
+
+        public string WallPaperDir
+        {
+            get => wallPaperDir;
+        }
 
         private struct RGBColors
         {
@@ -30,6 +46,27 @@ namespace Trio
             public static Color colorSettings = Color.FromArgb(95, 77, 221);
             //public static Color colorAbout = Color.FromArgb(249, 88, 155);
             public static Color colorAbout = Color.FromArgb(24, 161, 251);
+        }
+
+        public void CreateDir()
+        {
+            try
+            {
+                if (!Directory.Exists(homeDir))
+                {
+                    Directory.CreateDirectory(homeDir);
+                }
+
+                wallPaperDir = homeDir + @"\WallPapers";
+                if (!Directory.Exists(wallPaperDir))
+                {
+                    Directory.CreateDirectory(wallPaperDir);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Warning", MessageBoxButtons.OK);
+            }
         }
 
         public Main()
@@ -62,6 +99,9 @@ namespace Trio
 
             //limit Maximized bounds to the working area
             MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;  //防止最大化覆盖任务栏
+
+            // 创建目录
+            CreateDir();
         }
 
         /// <summary>
@@ -263,8 +303,9 @@ namespace Trio
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorSettings);
             CloseActiveForm(true);
-            //TODO
-            OpenChildForm(new Forms.Settings());
+            Forms.Settings settings = new Forms.Settings();
+            Forms.Settings.main = main;
+            OpenChildForm(settings);
         }
 
         /// <summary>

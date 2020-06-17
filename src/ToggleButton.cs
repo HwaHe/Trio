@@ -76,13 +76,13 @@ namespace Trio
                 }
                 if (this.textEnabled)
                 {
-                    using (Font font = new Font("Century Gothic", (8.2f * this.diameter) / 30f, (FontStyle)FontStyle.Bold))
+                    using (Font font = new Font("Century Gothic", (8.2f * this.diameter) / 48f, (FontStyle)FontStyle.Bold))
                     {
                         SolidBrush b = new SolidBrush(this.ForeColor);
                         int height = TextRenderer.MeasureText(this.onText, font).Height;
                         float num2 = (this.diameter - height) / 2f;
                         e.Graphics.DrawString(this.onText, font, b, 5f, num2 + 1f);
-                        height = TextRenderer.MeasureText(this.offText, font).Width;
+                        height = TextRenderer.MeasureText(this.offText, font).Height;
                         num2 = (this.diameter - height) / 2f;
                         e.Graphics.DrawString(this.offText, font, b, this.diameter + 2f, num2 + 1f);
                     }
