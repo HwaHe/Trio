@@ -278,8 +278,7 @@ namespace Trio
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorAbout);
             CloseActiveForm(true);
-            //TODO
-            //Open child form
+            OpenChildForm(new Forms.About());
         }
 
         public void CloseActiveForm(bool keepAlive)
