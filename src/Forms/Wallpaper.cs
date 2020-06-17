@@ -20,6 +20,9 @@ namespace Trio.Forms
 
         public string savepth;
 
+        public static Main main;
+        
+
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
         }
@@ -48,13 +51,14 @@ namespace Trio.Forms
             {
                 //在新窗口显示大图
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic1";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760; 
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox1.Image;
                 formnew.Show();
@@ -71,13 +75,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic2";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox2.Image;
                 formnew.Show();
@@ -94,13 +99,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic3";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox3.Image;
                 formnew.Show();
@@ -117,13 +123,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic4";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox4.Image;
                 formnew.Show();
@@ -140,13 +147,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic5";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox5.Image;
                 formnew.Show();
@@ -163,13 +171,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic6";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox6.Image;
                 formnew.Show();
@@ -186,13 +195,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic8";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox8.Image;
                 formnew.Show();
@@ -209,13 +219,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic7";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox7.Image;
                 formnew.Show();
@@ -232,13 +243,14 @@ namespace Trio.Forms
             else
             {
                 Form formnew = new Form();
-                formnew.Width = 1920;
-                formnew.Height = 1080;
+                formnew.Width = 1760;
+                formnew.Height = 990;
                 formnew.Text = "pic9";
+                formnew.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Height = 1080;
-                pictureBox.Width = 1920;
+                pictureBox.Height = 990;
+                pictureBox.Width = 1760;
                 formnew.Controls.Add(pictureBox);
                 pictureBox.Image = this.pictureBox9.Image;
                 formnew.Show();
