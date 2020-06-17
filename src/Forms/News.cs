@@ -113,7 +113,7 @@ namespace Trio.Forms
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
                 try
                 {
-                    pictureBox.Load(@"./assets/404.jpg");
+                    pictureBox.Load(@"../../assets/404.jpg");
                 }
                 catch (Exception e)
                 {
@@ -153,20 +153,26 @@ namespace Trio.Forms
             
             circularButton1.Text = "新闻";
             circularButton1.Size = new Size(90, 45);
-            circularButton1.Location = new Point(90, 23);
+            circularButton1.Location = new Point(tableLayoutPanel1.Width/3 - 45, 23);
             circularButton1.Click += delegate { circularButton1Click(); };
+            circularButton1.FlatStyle = FlatStyle.Flat;
+            circularButton1.FlatAppearance.BorderSize = 0;
             this.pnlOptions.Controls.Add(circularButton1);
 
             circularButton2.Text = "通知";
             circularButton2.Size = new Size(90, 45);
-            circularButton2.Location = new Point(90 + width, 23);
+            circularButton2.Location = new Point(tableLayoutPanel1.Width / 2 - 45, 23);
             circularButton2.Click += delegate { circularButton2Click(); };
+            circularButton2.FlatStyle = FlatStyle.Flat;
+            circularButton2.FlatAppearance.BorderSize = 0;
             this.pnlOptions.Controls.Add(circularButton2);
 
             circularButton3.Text = "学术";
             circularButton3.Size = new Size(90, 45);
-            circularButton3.Location = new Point(90 + 2 * width, 23);
+            circularButton3.Location = new Point(2 * tableLayoutPanel1.Width / 3 - 45, 23);
             circularButton3.Click += delegate { circularButton3Click(); };
+            circularButton3.FlatStyle = FlatStyle.Flat;
+            circularButton3.FlatAppearance.BorderSize = 0;
             this.pnlOptions.Controls.Add(circularButton3);
         }
 
@@ -249,7 +255,7 @@ namespace Trio.Forms
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
                 try
                 {
-                    pictureBox.Load(@"./assets/404.jpg");
+                    pictureBox.Load(@"../../assets/404.jpg");
                 }
                 catch (Exception e)
                 {
