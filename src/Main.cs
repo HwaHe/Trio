@@ -31,6 +31,7 @@ namespace Trio
         /// </summary>
         private Panel leftBorderBtn;
         private string homeDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Trio", wallPaperDir;
+        
 
         public string HomeDir{
             get => homeDir;
@@ -349,16 +350,26 @@ namespace Trio
         //提取网页html原码(公用)
         static string GetHTMLDoc(WebClient webClient, string webURL)
         {
-            string html = webClient.DownloadString(webURL);
-            return html;
+            try
+            {
+                webClient.Headers.Add("User-Agent", "Microsoft Internet Explorer");
+                string html = webClient.DownloadString(webURL);
+                return html;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "error";
+            }
+
         }
 
         //解析传入的图片信息，并下载图片(公用)
-        static void DownloadPic(string savePath, string imgInfo)
+        static void DownloadPic(string wallPaperDir, string imgInfo)
         {
             string imgId = imgInfo.Split(' ')[1];
             string imgURL = imgInfo.Split(' ')[0];
-            string dirPath = savePath + "\\" + imgId + ".jpg";
+            string dirPath = wallPaperDir + "\\" + imgId + ".jpg";
             if (File.Exists(dirPath))
             {
                 //do nothing
@@ -372,25 +383,54 @@ namespace Trio
         }
 
         //声明wallpaper子窗体(公用)
-        static Wallpaper wallpaper = new Wallpaper();
+        //static Wallpaper wallpaper = new Wallpaper();
 
         //利用正则表达式，从原码中解析出图片信息
         //用字符串存储信息，并用空格分隔
         //字符串前半部分是地址，后半部分是id,id是当前年月日(Bing)
-        static string GetPicInfoBing(string html)
+        static string[] GetPicInfoBing(string html)
         {
-            Match match = Regex.Match(html, "id=\"bgLink\".*?href=\"(.+?)\"");
-            string imgURL = @"https://cn.bing.com/" + match.Groups[1].Value;
-            string imgId = DateTime.Now.ToString("yyyy-MM-dd").Replace('-', '_') + '_' + "Bing";
-            string imgInfo = imgURL + ' ' + imgId;
-            return imgInfo;
+            string pattern = "a class=\"mark\" href=\"(.+?)\"";
+            MatchCollection matchCollection = Regex.Matches(html, pattern);
+            string[] urls = new string[9];
+
+            //解析一级链接
+            for (int i = 0; i < 9; i++)
+            {
+                string url = @"https://bing.ioliu.cn" + matchCollection[i].Groups[1].Value;
+                urls[i] = url;
+            }
+
+            string[] picInfos = new string[9];
+            string patternNew = "data-progressive=\"(.+?)\\?imageslim\"";
+
+            List<Task> tasks = new List<Task>();
+            int[] arr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+            foreach (int i in arr)
+            {
+                var task = new Task(() =>
+                {
+                    WebClient webClient = new WebClient();
+                    string htmlOld = GetHTMLDoc(webClient, urls[i]);
+                    Match match = Regex.Match(htmlOld, patternNew);
+                    string picUrl = match.Groups[1].Value;
+                    string id = DateTime.Now.ToString("yyyy-MM-dd").Replace('-', '_') + '_' + "Bing" + '_' + i.ToString();
+                    string picInfo = picUrl + ' ' + id;
+                    picInfos[i] = picInfo;
+                });
+                task.Start();
+                tasks.Add(task);
+            }
+            Task.WaitAll(tasks.ToArray());
+
+            return picInfos;
         }
 
         //把图片以blob形式存进MySQL数据库(Bing)
-        static void SavePicBing(string imgInfo, string savePath)
+        static void SavePicBing(string imgInfo, string wallPaperDir)
         {
             string imgId = imgInfo.Split(' ')[1];
-            string dirPath = savePath + "\\" + imgId + ".jpg";
+            string dirPath = wallPaperDir + "\\" + imgId + ".jpg";
 
             //把图片转换为byte格式
             byte[] bytes = null;
@@ -463,7 +503,7 @@ namespace Trio
         }
 
         //读出最新的九张图片，并显示在picturebox1-9中(Bing)
-        static void ReadPicBing()
+        static void ReadPicBing(Wallpaper wallpaper)
         {
 
             //创建连接
@@ -571,10 +611,10 @@ namespace Trio
         }
 
         //把图片以blob形式存进MySQL数据库(SW)
-        static void SavePicSW(string Info, string savePath)
+        static void SavePicSW(string Info, string wallPaperDir)
         {
             string imgId = Info.Split(' ')[1];
-            string dirPath = savePath + "\\" + imgId + ".jpg";
+            string dirPath = wallPaperDir + "\\" + imgId + ".jpg";
 
             //把图片转换为byte格式
             byte[] bytes = null;
@@ -648,7 +688,7 @@ namespace Trio
         }
 
         //读出最新的九张图片，并显示在picturebox1-9中(SW)
-        static void ReadPicSW()
+        static void ReadPicSW(Wallpaper wallpaper)
         {
 
             //创建连接
@@ -696,6 +736,9 @@ namespace Trio
             textBoxes[6] = wallpaper.textBox7;
             textBoxes[7] = wallpaper.textBox8;
             textBoxes[8] = wallpaper.textBox9;
+
+            
+
 
             if (liteDataReader.HasRows)
             {
@@ -775,10 +818,10 @@ namespace Trio
         }
 
         //把图片以blob形式存进MySQL数据库(BA)
-        static void SavePicBA(string Info, string savePath)
+        static void SavePicBA(string Info, string wallPaperDir)
         {
             string imgId = Info.Split(' ')[1];
-            string dirPath = savePath + "\\" + imgId + ".jpg";
+            string dirPath = wallPaperDir + "\\" + imgId + ".jpg";
 
             //把图片转换为byte格式
             byte[] bytes = null;
@@ -851,7 +894,7 @@ namespace Trio
         }
 
         //读出最新的九张图片，并显示在picturebox1-9中(SW)
-        static void ReadPicBA()
+        static void ReadPicBA(Wallpaper wallpaper)
         {
 
 
@@ -932,17 +975,26 @@ namespace Trio
 
         }
 
+
         private void BtnWallpaper_Click(object sender, EventArgs e)
         {
             ResetButton(null);
             ShowSubMenu(pnlWallpaper);
             CloseActiveForm(true);
             ActivateButton(sender, RGBColors.colorWallpaper);
+            //判断路径是否存在
+            if (!System.IO.Directory.Exists(wallPaperDir))
+            {
+                System.IO.Directory.CreateDirectory(wallPaperDir);//不存在就创建目录
+            }
         }
 
         private void BtnBing_Click(object sender, EventArgs e)
         {
             ResetButton(btnBing);
+
+            Wallpaper wallpaper = new Wallpaper();
+            Wallpaper.main = main;
 
             //准备右侧窗体
             pnlChildForm.Controls.Clear();
@@ -964,25 +1016,41 @@ namespace Trio
             wallpaper.textBox7.Text = "";
             wallpaper.textBox8.Text = "";
             wallpaper.textBox9.Text = "";
-            wallpaper.TopLevel = false;
-            wallpaper.Dock = DockStyle.Fill;
-            wallpaper.FormBorderStyle = FormBorderStyle.None;
-            pnlChildForm.Controls.Add(wallpaper);
-            wallpaper.Show();
+
+            OpenChildForm(wallpaper);
+
+            //wallpaper.TopLevel = false;
+            //wallpaper.Dock = DockStyle.Fill;
+            //wallpaper.FormBorderStyle = FormBorderStyle.None;
+            //pnlChildForm.Controls.Add(wallpaper);
+            //wallpaper.Show();
+
 
             //获得今日Bing图片并存入数据库
             WebClient webClient = new WebClient();
             webClient.Encoding = Encoding.UTF8;
-            string webURL = @"https://cn.bing.com/";
+            string webURL = @"https://bing.ioliu.cn/";
             string html = GetHTMLDoc(webClient, webURL);
-            string imgInfo = GetPicInfoBing(html);
-            string savePath = "D:\\a";
-            wallpaper.savepth = savePath;
-            DownloadPic(savePath, imgInfo);
-            SavePicBing(imgInfo, savePath);
+            string[] imgInfos = GetPicInfoBing(html);
 
-            //在右侧展示最新的九张图片   //用openChildForm
-            ReadPicBing();
+            wallpaper.savepth = wallPaperDir;
+
+            List<Task> tasks = new List<Task>();
+            int[] arr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+            foreach (int i in arr)
+            {
+                var task = new Task(() => {
+                    DownloadPic(wallPaperDir, imgInfos[i]);
+                    SavePicBing(imgInfos[i], wallPaperDir);
+                });
+                task.Start();
+                tasks.Add(task);
+            }
+            Task.WaitAll(tasks.ToArray());
+
+            //在右侧展示最新的九张图片
+            ReadPicBing(wallpaper);
+
 
             CustomizeButton(btnBing);
         }
@@ -991,6 +1059,9 @@ namespace Trio
         {
             ResetButton(btnSW);
 
+            Wallpaper wallpaper = new Wallpaper();
+            Wallpaper.main = main;
+
             //准备右侧窗体
             pnlChildForm.Controls.Clear();
             wallpaper.pictureBox1.Image = null;
@@ -1011,11 +1082,14 @@ namespace Trio
             wallpaper.textBox7.Text = "";
             wallpaper.textBox8.Text = "";
             wallpaper.textBox9.Text = "";
-            wallpaper.TopLevel = false;
-            wallpaper.Dock = DockStyle.Fill;
-            wallpaper.FormBorderStyle = FormBorderStyle.None;
-            pnlChildForm.Controls.Add(wallpaper);
-            wallpaper.Show();
+
+            OpenChildForm(wallpaper);
+
+            //wallpaper.TopLevel = false;
+            //wallpaper.Dock = DockStyle.Fill;
+            //wallpaper.FormBorderStyle = FormBorderStyle.None;
+            //pnlChildForm.Controls.Add(wallpaper);
+            //wallpaper.Show();
 
             //获取最新的九张图片
             WebClient webClient = new WebClient();
@@ -1023,16 +1097,16 @@ namespace Trio
             string webURL = @"http://streetwill.co/";
             string html = GetHTMLDoc(webClient, webURL);
             string[] Infos = GetPicInfoSW(html);
-            string savePath = "D:\\a";
-            wallpaper.savepth = savePath;
+            
+            wallpaper.savepth = wallPaperDir;
 
             List<Task> tasks = new List<Task>();
             int[] arr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
             foreach(int i in arr)
             {
                 var task = new Task(() => {
-                    DownloadPic(savePath, Infos[i]);
-                    SavePicSW(Infos[i], savePath);
+                    DownloadPic(wallPaperDir, Infos[i]);
+                    SavePicSW(Infos[i], wallPaperDir);
                 });
                 task.Start();
                 tasks.Add(task);
@@ -1041,7 +1115,7 @@ namespace Trio
 
 
             //在右侧展示获得的图片
-            ReadPicSW();
+            ReadPicSW(wallpaper);
 
             CustomizeButton(btnSW);
         }
@@ -1050,6 +1124,9 @@ namespace Trio
         {
             ResetButton(btnBA);
 
+            Wallpaper wallpaper = new Wallpaper();
+            Wallpaper.main = main;
+
             //准备右侧窗体
             pnlChildForm.Controls.Clear();
             wallpaper.pictureBox1.Image = null;
@@ -1070,11 +1147,14 @@ namespace Trio
             wallpaper.textBox7.Text = "";
             wallpaper.textBox8.Text = "";
             wallpaper.textBox9.Text = "";
-            wallpaper.TopLevel = false;
-            wallpaper.Dock = DockStyle.Fill;
-            wallpaper.FormBorderStyle = FormBorderStyle.None;
-            pnlChildForm.Controls.Add(wallpaper);
-            wallpaper.Show();
+
+            OpenChildForm(wallpaper);
+
+            //wallpaper.TopLevel = false;
+            //wallpaper.Dock = DockStyle.Fill;
+            //wallpaper.FormBorderStyle = FormBorderStyle.None;
+            //pnlChildForm.Controls.Add(wallpaper);
+            //wallpaper.Show();
 
             //获取最新的九张图片
             WebClient webClient = new WebClient();
@@ -1082,16 +1162,16 @@ namespace Trio
             string webURL = @"http://pic.netbian.com/";
             string html = GetHTMLDoc(webClient, webURL);
             string[] picInfos = GetUrlsBA(html);
-            string savePath = "D:\\a";
-            wallpaper.savepth = savePath;
+            
+            wallpaper.savepth = wallPaperDir;
 
             List<Task> tasks = new List<Task>();
             int[] arr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
             foreach (int i in arr)
             {
                 var task = new Task(() => {
-                    DownloadPic(savePath, picInfos[i]);
-                    SavePicBA(picInfos[i], savePath);
+                    DownloadPic(wallPaperDir, picInfos[i]);
+                    SavePicBA(picInfos[i], wallPaperDir);
                 });
                 task.Start();
                 tasks.Add(task);
@@ -1099,7 +1179,7 @@ namespace Trio
             Task.WaitAll(tasks.ToArray());
 
             //在右侧展示获得的图片
-            ReadPicBA();
+            ReadPicBA(wallpaper);
 
             CustomizeButton(btnBA);
         }

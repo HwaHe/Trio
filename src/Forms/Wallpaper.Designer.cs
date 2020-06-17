@@ -29,31 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.设为壁纸ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip6 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip8 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip7 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip9 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -65,36 +56,34 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox9 = new Trio.CircularPictureBox();
+            this.pictureBox8 = new Trio.CircularPictureBox();
+            this.pictureBox7 = new Trio.CircularPictureBox();
+            this.pictureBox6 = new Trio.CircularPictureBox();
+            this.pictureBox5 = new Trio.CircularPictureBox();
+            this.pictureBox4 = new Trio.CircularPictureBox();
+            this.pictureBox3 = new Trio.CircularPictureBox();
+            this.pictureBox2 = new Trio.CircularPictureBox();
+            this.pictureBox1 = new Trio.CircularPictureBox();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.contextMenuStrip3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.contextMenuStrip4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.contextMenuStrip5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.contextMenuStrip6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.contextMenuStrip8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.contextMenuStrip7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.contextMenuStrip9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.ContextMenuStrip = this.contextMenuStrip1;
-            this.pictureBox1.Location = new System.Drawing.Point(57, 94);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // contextMenuStrip1
             // 
@@ -112,17 +101,6 @@
             this.设为壁纸ToolStripMenuItem.Text = "设为壁纸";
             this.设为壁纸ToolStripMenuItem.Click += new System.EventHandler(this.设为壁纸ToolStripMenuItem_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.ContextMenuStrip = this.contextMenuStrip2;
-            this.pictureBox2.Location = new System.Drawing.Point(352, 94);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -137,17 +115,6 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 24);
             this.toolStripMenuItem1.Text = "设为壁纸";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.ContextMenuStrip = this.contextMenuStrip3;
-            this.pictureBox3.Location = new System.Drawing.Point(648, 94);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // contextMenuStrip3
             // 
@@ -164,17 +131,6 @@
             this.toolStripMenuItem2.Text = "设为壁纸";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
-            // pictureBox4
-            // 
-            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip4;
-            this.pictureBox4.Location = new System.Drawing.Point(57, 272);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
-            // 
             // contextMenuStrip4
             // 
             this.contextMenuStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -189,17 +145,6 @@
             this.toolStripMenuItem3.Size = new System.Drawing.Size(138, 24);
             this.toolStripMenuItem3.Text = "设为壁纸";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.ContextMenuStrip = this.contextMenuStrip5;
-            this.pictureBox5.Location = new System.Drawing.Point(352, 272);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 4;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
             // 
             // contextMenuStrip5
             // 
@@ -216,17 +161,6 @@
             this.toolStripMenuItem4.Text = "设为壁纸";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
-            // pictureBox6
-            // 
-            this.pictureBox6.ContextMenuStrip = this.contextMenuStrip6;
-            this.pictureBox6.Location = new System.Drawing.Point(648, 272);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 5;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
-            // 
             // contextMenuStrip6
             // 
             this.contextMenuStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -241,17 +175,6 @@
             this.toolStripMenuItem5.Size = new System.Drawing.Size(138, 24);
             this.toolStripMenuItem5.Text = "设为壁纸";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.ContextMenuStrip = this.contextMenuStrip8;
-            this.pictureBox8.Location = new System.Drawing.Point(352, 452);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 6;
-            this.pictureBox8.TabStop = false;
-            this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
             // 
             // contextMenuStrip8
             // 
@@ -268,17 +191,6 @@
             this.toolStripMenuItem7.Text = "设为壁纸";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
-            // pictureBox7
-            // 
-            this.pictureBox7.ContextMenuStrip = this.contextMenuStrip7;
-            this.pictureBox7.Location = new System.Drawing.Point(57, 452);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 7;
-            this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
-            // 
             // contextMenuStrip7
             // 
             this.contextMenuStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -293,17 +205,6 @@
             this.toolStripMenuItem6.Size = new System.Drawing.Size(138, 24);
             this.toolStripMenuItem6.Text = "设为壁纸";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.ContextMenuStrip = this.contextMenuStrip9;
-            this.pictureBox9.Location = new System.Drawing.Point(648, 452);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(240, 135);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 8;
-            this.pictureBox9.TabStop = false;
-            this.pictureBox9.Click += new System.EventHandler(this.pictureBox9_Click);
             // 
             // contextMenuStrip9
             // 
@@ -401,12 +302,129 @@
             this.textBox9.TabIndex = 18;
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // pictureBox9
+            // 
+            this.pictureBox9.ContextMenuStrip = this.contextMenuStrip9;
+            this.pictureBox9.Location = new System.Drawing.Point(648, 452);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.RoundRadius = 20;
+            this.pictureBox9.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 27;
+            this.pictureBox9.TabStop = false;
+            this.pictureBox9.Click += new System.EventHandler(this.pictureBox9_Click);
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.ContextMenuStrip = this.contextMenuStrip8;
+            this.pictureBox8.Location = new System.Drawing.Point(352, 452);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.RoundRadius = 20;
+            this.pictureBox8.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 26;
+            this.pictureBox8.TabStop = false;
+            this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.ContextMenuStrip = this.contextMenuStrip7;
+            this.pictureBox7.Location = new System.Drawing.Point(57, 452);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.RoundRadius = 20;
+            this.pictureBox7.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 25;
+            this.pictureBox7.TabStop = false;
+            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.ContextMenuStrip = this.contextMenuStrip6;
+            this.pictureBox6.Location = new System.Drawing.Point(648, 272);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.RoundRadius = 20;
+            this.pictureBox6.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 24;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.ContextMenuStrip = this.contextMenuStrip5;
+            this.pictureBox5.Location = new System.Drawing.Point(352, 272);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.RoundRadius = 20;
+            this.pictureBox5.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 23;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip4;
+            this.pictureBox4.Location = new System.Drawing.Point(57, 272);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.RoundRadius = 20;
+            this.pictureBox4.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 22;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.ContextMenuStrip = this.contextMenuStrip3;
+            this.pictureBox3.Location = new System.Drawing.Point(648, 94);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.RoundRadius = 20;
+            this.pictureBox3.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 21;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.ContextMenuStrip = this.contextMenuStrip2;
+            this.pictureBox2.Location = new System.Drawing.Point(352, 94);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.RoundRadius = 20;
+            this.pictureBox2.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 20;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.pictureBox1.Location = new System.Drawing.Point(57, 94);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.RoundRadius = 20;
+            this.pictureBox1.Size = new System.Drawing.Size(240, 135);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // Wallpaper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 696);
+            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
@@ -416,54 +434,35 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "Wallpaper";
             this.Text = "Wallpaper";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.contextMenuStrip3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.contextMenuStrip4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.contextMenuStrip5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.contextMenuStrip6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.contextMenuStrip8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.contextMenuStrip7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.contextMenuStrip9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        public System.Windows.Forms.PictureBox pictureBox1;
-        public System.Windows.Forms.PictureBox pictureBox2;
-        public System.Windows.Forms.PictureBox pictureBox3;
-        public System.Windows.Forms.PictureBox pictureBox4;
-        public System.Windows.Forms.PictureBox pictureBox5;
-        public System.Windows.Forms.PictureBox pictureBox6;
-        public System.Windows.Forms.PictureBox pictureBox8;
-        public System.Windows.Forms.PictureBox pictureBox7;
-        public System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 设为壁纸ToolStripMenuItem;
         public System.Windows.Forms.TextBox textBox9;
@@ -491,5 +490,14 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip9;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        public CircularPictureBox pictureBox1;
+        public CircularPictureBox pictureBox2;
+        public CircularPictureBox pictureBox3;
+        public CircularPictureBox pictureBox4;
+        public CircularPictureBox pictureBox5;
+        public CircularPictureBox pictureBox6;
+        public CircularPictureBox pictureBox7;
+        public CircularPictureBox pictureBox8;
+        public CircularPictureBox pictureBox9;
     }
 }
