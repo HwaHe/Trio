@@ -25,7 +25,9 @@ namespace Trio
         public bool logged = false;
         private Forms.Library lib;
         private IconButton currentBtn;
-        private Form activeForm = null;
+        private Form activeForm = null; /// <summary>
+        /// /
+        /// </summary>
         private Panel leftBorderBtn;
 
         private Thread ldn;
@@ -937,7 +939,7 @@ namespace Trio
             DownloadPic(savePath, imgInfo);
             SavePicBing(imgInfo, savePath);
 
-            //在右侧展示最新的九张图片
+            //在右侧展示最新的九张图片   //用openChildForm
             ReadPicBing();
 
             CustomizeButton(btnBing);
