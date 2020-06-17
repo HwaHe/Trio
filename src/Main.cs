@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -29,6 +30,21 @@ namespace Trio
         /// /
         /// </summary>
         private Panel leftBorderBtn;
+        private string homeDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Trio", wallPaperDir;
+
+        public string HomeDir{
+            get => homeDir;
+            set
+            {
+                homeDir = value;
+                CreateDir();
+            }
+        }
+
+        public string WallPaperDir
+        {
+            get => wallPaperDir;
+        }
 
         private Thread ldn;
         public List<(string, string)> whuNewsTitle = new List<(string, string)>();
@@ -48,6 +64,27 @@ namespace Trio
             public static Color colorSettings = Color.FromArgb(95, 77, 221);
             //public static Color colorAbout = Color.FromArgb(249, 88, 155);
             public static Color colorAbout = Color.FromArgb(24, 161, 251);
+        }
+
+        public void CreateDir()
+        {
+            try
+            {
+                if (!Directory.Exists(homeDir))
+                {
+                    Directory.CreateDirectory(homeDir);
+                }
+
+                wallPaperDir = homeDir + @"\WallPapers";
+                if (!Directory.Exists(wallPaperDir))
+                {
+                    Directory.CreateDirectory(wallPaperDir);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Warning", MessageBoxButtons.OK);
+            }
         }
 
         public Main()
@@ -99,6 +136,8 @@ namespace Trio
                     cmd.ExecuteNonQuery();
                 }
             }
+            // 创建目录
+            CreateDir();
         }
 
         /// <summary>
@@ -213,6 +252,9 @@ namespace Trio
             ShowSubMenu(pnlNews);
             CloseActiveForm(true);
             ActivateButton(sender, RGBColors.colorNews);
+
+
+
         }
 
         private void BtnWhu_Click(object sender, EventArgs e)   //武大官网  1
@@ -1079,6 +1121,7 @@ namespace Trio
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorLibrarySeat);
             CloseActiveForm(true);
+
             Forms.Login login = new Forms.Login();
             Forms.Login.main = main;
             OpenChildForm(login);
@@ -1095,8 +1138,9 @@ namespace Trio
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorSettings);
             CloseActiveForm(true);
-            //TODO
-            //Open child form
+            Forms.Settings settings = new Forms.Settings();
+            Forms.Settings.main = main;
+            OpenChildForm(settings);
         }
 
         /// <summary>
@@ -1110,8 +1154,7 @@ namespace Trio
             HideSubMenu();
             ActivateButton(sender, RGBColors.colorAbout);
             CloseActiveForm(true);
-            //TODO
-            //Open child form
+            OpenChildForm(new Forms.About());
         }
 
         public void CloseActiveForm(bool keepAlive)

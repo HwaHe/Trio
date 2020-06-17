@@ -30,7 +30,7 @@ namespace Trio.Forms
           int uParam,
           string lpvParam,
           int fuWinIni
-);
+        );
 
         private void 设为壁纸ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -293,6 +293,5 @@ namespace Trio.Forms
             string dirPath = savepth + "\\" + this.textBox9.Text + ".jpg";
             SystemParametersInfo(20, 1, dirPath, 1);
         }
-
     }
 }

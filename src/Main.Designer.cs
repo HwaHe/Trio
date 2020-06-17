@@ -518,7 +518,7 @@
             // pnlChildForm
             // 
             this.pnlChildForm.Controls.Add(this.picHome);
-            this.pnlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChildForm.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlChildForm.Location = new System.Drawing.Point(250, 38);
             this.pnlChildForm.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChildForm.Name = "pnlChildForm";
