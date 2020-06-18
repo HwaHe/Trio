@@ -42,7 +42,7 @@
             this.picHome.IconChar = FontAwesome.Sharp.IconChar.Home;
             this.picHome.IconColor = System.Drawing.SystemColors.ControlText;
             this.picHome.IconSize = 36;
-            this.picHome.Location = new System.Drawing.Point(22, 18);
+            this.picHome.Location = new System.Drawing.Point(25, 26);
             this.picHome.Name = "picHome";
             this.picHome.Size = new System.Drawing.Size(36, 36);
             this.picHome.TabIndex = 0;
